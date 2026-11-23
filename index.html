@@ -32,7 +32,7 @@
   .nut:active { transform: translateY(3px); box-shadow: 0 2px 0 #1e6b48; }
   .tron { width: 50px; height: 50px; padding: 0; font-size: 22px; border-radius: 50%; background: linear-gradient(#fff, #e9dcc6); color: #5b3a1a; text-shadow: none; box-shadow: 0 4px 0 #b7915b, 0 6px 10px #0004; }
   #nCH { font-size: 26px; padding: 12px 34px; white-space: nowrap; }
-  #tb { position: absolute; left: 50%; top: 84px; transform: translateX(-50%) scale(.8); z-index: 6; padding: 9px 24px; border-radius: 18px; font-weight: 900;
+  #tb { position: absolute; left: 50%; top: 70px; transform: translateX(-50%) scale(.8); z-index: 6; padding: 9px 24px; border-radius: 18px; font-weight: 900;
     font-size: 21px; color: #fff; background: linear-gradient(#ffb74d, #f57c00); border: 3px solid #fff; box-shadow: 0 5px 0 #b45309; opacity: 0;
     transition: opacity .25s, transform .25s; pointer-events: none; white-space: nowrap; max-width: 96%; overflow: hidden; text-overflow: ellipsis; }
   #tb.hien { opacity: 1; transform: translateX(-50%) scale(1); }
@@ -72,29 +72,88 @@
   #md .bang { height: auto; max-height: calc(100% - 14px); overflow-y: auto; text-align: center; padding-bottom: 18px; width: min(820px, calc(100% - 14px)); }
   #md h1 { font-size: 46px; margin: 16px 10px 4px; color: #e4572e; text-shadow: 0 4px 0 #ffd54a, 0 6px 0 #b46b00; }
   #md p { font-size: 17px; color: #5d4037; margin: 6px 22px; line-height: 1.5; }
+  /* giao dien kieu pho nha hang */
+  #thanh { position: absolute; left: 0; right: 0; top: 0; height: 58px; z-index: 6; display: flex; align-items: center; gap: 10px; padding: 0 10px;
+    background: repeating-linear-gradient(90deg, #8f5d2f 0 58px, #7a4d25 58px 60px); box-shadow: 0 4px 0 #5a3a1c, 0 7px 12px #0005; overflow-x: auto; scrollbar-width: none; }
+  #logo { flex: none; background: linear-gradient(#55c75d, #2f9a39); border: 3px solid #fff; border-radius: 8px; padding: 3px 12px; transform: rotate(-4deg); box-shadow: 0 3px 0 #1f6b27; text-align: center; line-height: 1.05; }
+  #logo b { display: block; color: #fff; font-size: 15px; font-weight: 900; letter-spacing: 1px; text-shadow: 0 2px 0 #1f6b27; }
+  #thanh .the { font-size: 19px; padding: 3px 12px 3px 4px; background: rgba(40,22,8,.45); color: #fff; border: 2px solid rgba(255,255,255,.35); box-shadow: inset 0 2px 0 #0003; flex: none; border-radius: 16px; }
+  #thanh .the .ic { width: 32px; height: 32px; font-size: 19px; }
+  #thanh .nho { color: #ffe0b2; }
+  #thanh .sao { font-size: 17px; }
+  #hCap .ic { background: radial-gradient(circle at 35% 30%, #fff, #a5d6a7 60%, #2e7d32); }
+  #thanhXP { width: 110px; height: 10px; background: #2b1a0c; border-radius: 6px; overflow: hidden; border: 1px solid #ffffff55; }
+  #thanhXP b { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #ffffff, #b3e5fc); }
+  #tCap { background: #2e7d32; color: #fff; border-radius: 8px; padding: 0 8px; font-size: 18px; border: 2px solid #fff; }
+  #tXP { font-size: 12px; color: #ffe0b2; }
+  #thanh #nAm { width: 42px; height: 42px; margin-left: auto; flex: none; }
+  #chip { left: 10px; top: 66px; right: 200px; }
+  #chip .the { font-size: 15px; padding: 3px 11px; box-shadow: 0 3px 0 #b7915b, 0 4px 8px #0003; }
+  #cong { position: absolute; left: 0; right: 0; bottom: 0; height: 84px; z-index: 6; background: linear-gradient(#fbfaf6, #e2dfd6); border-top: 3px solid #fff;
+    box-shadow: 0 -3px 10px #0003; display: flex; align-items: center; gap: 2px; overflow-x: auto; overflow-y: hidden; touch-action: pan-x; scrollbar-width: none; padding: 0 8px; }
+  #cong > :first-child { margin-left: auto; } #cong > :last-child { margin-right: auto; }
+  #cong button { flex: none; width: 66px; height: 78px; border: none; background: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-family: inherit; position: relative; border-radius: 14px; padding: 0; }
+  #cong button:hover { background: #ffffffaa; } #cong button:active { transform: translateY(2px); }
+  #cong .bi { font-size: 38px; line-height: 1.1; filter: drop-shadow(0 3px 0 rgba(0,0,0,.22)); }
+  #cong .nh { font-size: 11.5px; font-weight: 900; color: #5d4037; margin-top: 2px; white-space: nowrap; }
+  #cong .huy { position: absolute; top: 1px; right: 2px; background: #e53935; color: #fff; border-radius: 10px; font-size: 12px; font-weight: 900; padding: 0 6px; border: 2px solid #fff; }
+  #cong .gach { width: 2px; height: 54px; background: #d0ccc2; flex: none; margin: 0 4px; }
+  #nvPanel { position: absolute; right: 8px; top: 66px; bottom: 94px; width: 180px; z-index: 5; background: rgba(255,255,255,.85); border: 3px solid #fff; border-radius: 14px;
+    box-shadow: 0 4px 12px #0004; display: flex; flex-direction: column; overflow: hidden; }
+  #nvDau { background: linear-gradient(#ff9cbd, #e8679a); color: #fff; font-weight: 900; font-size: 15px; padding: 6px 10px; text-shadow: 0 1px 0 #a33d66; display: flex; justify-content: space-between; align-items: center; }
+  #nvDau button { border: none; background: #fff; color: #e8679a; border-radius: 50%; width: 24px; height: 24px; font-weight: 900; cursor: pointer; padding: 0; }
+  #nvDs { flex: 1; overflow-y: auto; padding: 6px; display: flex; flex-direction: column; gap: 6px; touch-action: pan-y; scrollbar-width: thin; }
+  .nvThe { background: linear-gradient(#ffe6f0, #f8c3d8); border: 2px solid #fff; border-radius: 10px; box-shadow: 0 2px 0 #d98aab; padding: 4px 5px; flex: none; }
+  .nvThe .h { display: flex; align-items: center; gap: 5px; font-weight: 900; font-size: 13px; color: #5d4037; }
+  .nvThe .h span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nvThe .h i { font-style: normal; width: 24px; height: 24px; border-radius: 50%; background: #ff8fb5; display: grid; place-items: center; font-size: 14px; border: 2px solid #fff; }
+  .nvThe .a { height: 78px; display: flex; align-items: flex-start; justify-content: center; background: radial-gradient(ellipse at 50% 85%, #ffffff 0 35%, #fdd5e5 70%); border-radius: 8px; margin: 3px 0; overflow: hidden; }
+  .nvThe .a img { height: 78px; }
+  .nvThe .s { font-size: 11.5px; color: #8d4a6a; font-weight: 800; }
   .an { display: none !important; }
 </style>
 </head>
 <body>
 <div id="khung">
   <canvas id="cv"></canvas>
-  <div class="hud" style="left:12px; top:10px; right:70px">
-    <div class="the" id="hTien"><div class="ic">💰</div><span id="tTien">0</span></div>
-    <div class="the" id="hSao"><div class="ic">⭐</div><span class="sao" id="tSao"></span><div id="thanhSao"><b></b></div></div>
+  <div id="thanh">
+    <div id="logo"><b>NHÀ HÀNG</b><b>VUI VẺ</b></div>
+    <div class="the" id="hTien"><div class="ic">💵</div><span id="tTien">0</span></div>
+    <div class="the" id="hCap"><div class="ic">🍳</div><div><div id="thanhXP"><b></b></div><div id="tXP"></div></div><span id="tCap">1</span></div>
+    <div class="the" id="hSao"><div class="ic">👍</div><span id="tDiem">0</span><span class="sao" id="tSao"></span><div id="thanhSao"><b></b></div></div>
     <div class="the" id="hKhach"><div class="ic">😊</div><span id="tKhach">0</span><span class="nho" id="tPhut"></span></div>
+    <button class="nut tron" id="nAm" title="Âm thanh">🔊</button>
+  </div>
+  <div class="hud" id="chip">
     <div class="the an" id="hCD">🔥 Giờ cao điểm</div>
     <div class="the an" id="hSK" style="background:linear-gradient(#b3e5fc,#4fc3f7);color:#01579b"></div>
-    <div class="the" id="hMon" style="font-size:16px"></div>
-    <div class="the" id="hMua" style="font-size:16px"></div>
-    <div class="the an" id="hBuff" style="font-size:16px;background:linear-gradient(#e1bee7,#ba68c8);color:#fff"></div>
+    <div class="the" id="hMon"></div>
+    <div class="the" id="hMua"></div>
+    <div class="the an" id="hBuff" style="background:linear-gradient(#e1bee7,#ba68c8);color:#fff"></div>
   </div>
-  <div class="hud" style="right:12px; top:10px; flex-direction:column"><button class="nut tron" id="nAm" title="Âm thanh">🔊</button><button class="nut tron" id="nNhac" title="Nhạc nền">🎵</button><button class="nut tron" id="nQuay" title="Vòng quay may mắn">🎡</button></div>
-  <div class="hud" style="right:12px; bottom:14px; flex-direction:column; gap:10px">
+  <div class="hud" style="left:10px; bottom:96px; flex-direction:column; gap:10px">
     <button class="nut tron" id="nPhong" title="Phóng to">➕</button>
     <button class="nut tron" id="nThu" title="Thu nhỏ">➖</button>
-    <button class="nut tron" id="nVua" title="Xem cả quán">🎯</button>
   </div>
-  <div class="hud" style="left:50%; bottom:14px; transform:translateX(-50%)"><button class="nut" id="nCH">🛒 Nâng cấp</button></div>
+  <div id="nvPanel"><div id="nvDau"><span>👥 Đội ngũ <small id="nvSo" style="font-size:12px"></small></span><button id="nvDong">✖</button></div><div id="nvDs"></div></div>
+  <div id="cong">
+    <button id="nVua"><span class="bi">🗺️</span><span class="nh">Cả quán</span></button>
+    <div class="gach"></div>
+    <button data-tab="0"><span class="bi">🔨</span><span class="nh">Nhà hàng</span></button>
+    <button data-tab="1"><span class="bi">👕</span><span class="nh">Nhân viên</span></button>
+    <button data-tab="2"><span class="bi">🧺</span><span class="nh">Bếp</span></button>
+    <button data-tab="3"><span class="bi">🍝</span><span class="nh">Thực đơn</span></button>
+    <button data-tab="4"><span class="bi">🪴</span><span class="nh">Trang trí</span></button>
+    <button data-tab="5"><span class="bi">📣</span><span class="nh">Khách</span></button>
+    <button data-tab="6"><span class="bi">💼</span><span class="nh">Kinh doanh</span></button>
+    <button data-tab="7" id="nNVu"><span class="bi">🏆</span><span class="nh">Nhiệm vụ</span><span class="huy an" id="soNVu"></span></button>
+    <div class="gach"></div>
+    <button id="nNV"><span class="bi">👥</span><span class="nh" id="nvNhan">Đội ngũ</span></button>
+    <button id="nQuay"><span class="bi">🎡</span><span class="nh">Vòng quay</span></button>
+    <button id="nNhac"><span class="bi">🎵</span><span class="nh">Nhạc</span></button>
+  </div>
+  <button id="nCH" class="an">🛒</button>
   <div id="tb"></div>
   <div id="vq" class="an" style="position:absolute;inset:0;z-index:25;background:#0008;display:flex;align-items:center;justify-content:center">
     <div class="bang" style="width:min(460px,calc(100% - 14px));height:auto;padding:14px;align-items:center;text-align:center;gap:10px">
@@ -109,6 +168,7 @@
   <div id="ch"><div class="bang">
     <div class="dau"><h2>🛒 Nâng cấp</h2>
       <label class="tuMua"><input type="checkbox" id="oTuMua"> Tự mua món rẻ nhất</label>
+      <label class="tuMua"><input type="checkbox" id="oGiuKieu"> Giữ sàn caro, tường nâu</label>
       <div class="the" style="font-size:19px;padding:3px 12px 3px 5px"><div class="ic" style="width:30px;height:30px;font-size:18px;background:radial-gradient(circle at 35% 30%,#fff6b0,#ffc107 50%,#e09400)">💰</div><span id="chTien">0</span></div>
       <button class="nut tron" id="nDong" style="width:44px;height:44px;background:linear-gradient(#fff,#ffe0d6);color:#e4572e">✖</button></div>
     <div class="tabs" id="tabs"></div>
@@ -117,6 +177,7 @@
 
   <div id="md"><div class="bang">
     <h1>🍜 Nhà Hàng Vui Vẻ</h1>
+    <p style="font-weight:900;color:#2e9e6b">Giao diện mới kiểu phố nhà hàng: sàn caro đỏ trắng, bàn gỗ thắp nến, vườn rau, đội ngũ nhân viên có tên riêng, nhà hàng có cấp độ</p>
     <p>Anh là ông chủ! Khách tự vào quán, đầu bếp tự nấu, phục vụ bưng món và dọn bàn, lao công quét dọn.</p>
     <p>🛒 <b>Nâng cấp không giới hạn</b>: 172 loại nâng cấp, 80 món ăn, 90 đồ trang trí. Thêm bàn là quán tự <b>mở rộng</b>; mỗi bàn <b>4 ghế</b>, nâng cấp ghế ngồi để bàn dài thêm.<br>
       👪 Khách đi theo nhóm · 🚌 Đoàn du lịch · 🧐 Nhà phê bình · 🌧️ Trời mưa · 🎉 Lễ hội · 🎁 Chạm hộp quà để nhận tiền · 🏆 Nhiệm vụ có thưởng<br>🎡 Vòng quay may mắn · 🎵 Nhạc nền · 🌸 Bốn mùa · 🎆 Pháo hoa ban đêm · 🐈 Thú cưng<br>
@@ -381,7 +442,7 @@ const giaUP = (u, c) => Math.round(u.g * Math.pow(DEM[u.id] ? 1.1 : 1.125, c));
 const giaMonCap = (i, c) => (c ? Math.round(MON[i].gia * 4 * Math.pow(1.11, c)) : MON[i].gia_mo);
 const giaTT = (t, c) => Math.round(t.gia * Math.pow(1.12, c));
 
-const MAC_DINH = () => ({ tien: 150, tong: 0, mat: 0, luc: Date.now(), thuPhut: 0, tuMua: false, tongThu: 0, soQua: 0, nv: {}, ten: "Nhà hàng Vui Vẻ",
+const MAC_DINH = () => ({ xp: 0, capThuong: 1, tien: 150, tong: 0, mat: 0, luc: Date.now(), thuPhut: 0, tuMua: false, tongThu: 0, soQua: 0, nv: {}, ten: "Nhà hàng Vui Vẻ",
   cap: Object.fromEntries(UP.map((u) => [u.id, 0])), mon: MON.map((m, i) => (i < 3 ? 1 : 0)), tt: {} });
 let S = MAC_DINH(), ST = {}, N = {};
 function tinhST() {
@@ -393,14 +454,14 @@ function tinhST() {
 // ======================================================================
 // VE CO BAN
 // ======================================================================
-const cv = document.getElementById("cv"), ctx = cv.getContext("2d");
+const cv = document.getElementById("cv"); let ctx = cv.getContext("2d");
 const TW = 70, TH = 35;
 function iso(gx, gy, z = 0) { return { x: (gx - gy) * TW / 2, y: (gx + gy) * TH / 2 - z }; }
 function poly(pts, fill, line) { ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y); for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y); ctx.closePath(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (line) { ctx.strokeStyle = line; ctx.lineWidth = 1; ctx.stroke(); } }
 function sang(hex, k) { const n = parseInt(hex.slice(1), 16); const f = (v) => Math.max(0, Math.min(255, Math.round(v * k))); return "#" + ((1 << 24) | (f(n >> 16) << 16) | (f((n >> 8) & 255) << 8) | f(n & 255)).toString(16).slice(1); }
 function tronMau(a, b, k) { const x = parseInt(a.slice(1), 16), y = parseInt(b.slice(1), 16); const c = (q) => Math.round(((x >> q) & 255) * (1 - k) + ((y >> q) & 255) * k); return "#" + ((1 << 24) | (c(16) << 16) | (c(8) << 8) | c(0)).toString(16).slice(1); }
 function hop(gx, gy, w, d, h, mau, z = 0) {
-  const A = iso(gx, gy, z), B = iso(gx + w, gy, z), C = iso(gx + w, gy + d, z), D = iso(gx, gy + d, z), up = (p) => ({ x: p.x, y: p.y - h }), v = "rgba(60,30,10,.2)";
+  const A = iso(gx, gy, z), B = iso(gx + w, gy, z), C = iso(gx + w, gy + d, z), D = iso(gx, gy + d, z), up = (p) => ({ x: p.x, y: p.y - h }), v = "rgba(50,25,10,.42)";
   poly([D, C, up(C), up(D)], sang(mau, 0.8), v); poly([C, B, up(B), up(C)], sang(mau, 0.64), v); poly([up(A), up(B), up(C), up(D)], sang(mau, 1.08), v);
 }
 function tron(x, y, rx, ry, mau) { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); ctx.fillStyle = mau; ctx.fill(); }
@@ -436,7 +497,7 @@ function boCuc() {
   for (let gy = 3.9, k = 0; gy < GY - 0.9; gy += 2.1, k++) (k % 2 ? BC.soTrai : BC.tuongTrai).push(gy);
   const nq = N.quay, mq = Math.max(1, Math.floor((GX - 3.2) / 0.9));
   for (let i = 0; i < nq; i++) BC.quay.push({ gx: 1.6 + (i % mq) * ((GX - 3.2) / Math.max(1, Math.min(nq, mq) - 1 || 1)), gy: QUAY_GY - 0.12 + Math.floor(i / mq) * 0.24 });
-  BC.khoa = [GX, GY, S.cap.san, S.cap.tuongson].join(",");
+  BC.khoa = [GX, GY, S.cap.san, S.cap.tuongson, S.giuKieu].join(",");
 }
 
 // ======================================================================
@@ -446,6 +507,9 @@ const DA = ["#f5cfa8", "#e8b88f", "#d9a27a", "#f7d9bd", "#c98c64"];
 const TOC = ["#3b2416", "#1f1a17", "#6b3e1f", "#c47a2c", "#8a8a8a", "#e0c070"];
 const AO = ["#e57373", "#64b5f6", "#81c784", "#ffb74d", "#ba68c8", "#4db6ac", "#f06292", "#9575cd", "#ffd54f", "#90a4ae", "#a1887f"];
 const ch1 = (a) => a[Math.floor(Math.random() * a.length)];
+const TEN_NAM = ["Minh", "Hùng", "Tuấn", "Dũng", "Nam", "Quân", "Sơn", "Long", "Phong", "Bình", "Khoa", "Đức", "Tùng", "Hải", "Kiên", "Huy", "Thắng", "Toàn", "Vinh", "Lộc"];
+const TEN_NU = ["Lan", "Mai", "Hoa", "Hà", "Linh", "Thảo", "Ngọc", "Trang", "Yến", "Vy", "Huyền", "My", "Nhung", "Thu", "Duyên", "Hằng", "Ánh", "Chi", "Quỳnh", "Loan"];
+let demTen = 0;
 class NV {
   constructor(vaiTro, gx, gy) {
     this.vt = vaiTro; this.gx = gx; this.gy = gy; this.dich = null; this.toc = 2.2; this.huong = 1; this.buoc = Math.random() * 6; this.hen = null;
@@ -454,6 +518,7 @@ class NV {
     this.co = 1; this.kieuToc = this.gai ? ch1([1, 1, 2]) : ch1([0, 0, 4]); this.vay = this.gai && Math.random() < 0.5; this.kinh = false; this.caVat = !this.gai && Math.random() < 0.3;
     if (vaiTro === "khach") { const r = Math.random(); if (r < 0.15) { this.co = 0.72; this.caVat = false; this.ao = ch1(["#ff7043", "#29b6f6", "#ffee58", "#66bb6a"]); } else if (r < 0.3) { this.mauToc = ch1(["#d6d6d6", "#bdbdbd"]); this.kinh = true; if (!this.gai) this.kieuToc = 3; } }
     this.phuKien = vaiTro === "khach" ? ch1([0, 0, 0, 0, 1, 2, 3]) : 0; this.mauMu = ch1(["#e53935", "#1e88e5", "#43a047", "#fdd835", "#212121"]);
+    if (vaiTro !== "khach") { const ds = this.gai ? TEN_NU : TEN_NAM; this.ten = ds[(demTen++ * 7 + Math.floor(Math.random() * 3)) % ds.length]; this.lan = 0; }
     if (vaiTro === "pv") { this.ao = "#fafafa"; this.quan = "#263238"; this.giay = "#212121"; this.vay = false; this.ghile = "#c62828"; this.caVat = false; }
     if (vaiTro === "bep") { this.ao = "#ffffff"; this.quan = "#455a64"; this.giay = "#212121"; this.vay = false; this.kieuToc = 0; this.caVat = false; }
     if (vaiTro === "lc") { this.ao = "#e3f2fd"; this.quan = "#2f5f9e"; this.giay = "#3e2723"; this.vay = false; this.yem = "#2f5f9e"; this.caVat = false; }
@@ -476,15 +541,15 @@ class NV {
     if (CAM.z < 0.5 || (W && W.khach.length > 90 && CAM.z < 0.75)) { // nhin xa hoac qua dong: ve gon
       tron(p.x, p.y, 14 * sc, 5 * sc, "rgba(0,0,0,.25)");
       chuNhatTron(p.x - 9 * sc, p.y - 52 * sc - (this.ngoi ? 12 : 0), 18 * sc, 46 * sc, 7 * sc, this.ghile || this.ao);
-      tron(p.x, p.y - 66 * sc - (this.ngoi ? 12 : 0), 11 * sc, 12 * sc, this.da); ctx.beginPath(); ctx.ellipse(p.x, p.y - 70 * sc - (this.ngoi ? 12 : 0), 11.5 * sc, 8 * sc, 0, Math.PI, 0); ctx.fillStyle = this.vt === "bep" ? "#fff" : this.mauToc; ctx.fill();
+      tron(p.x, p.y - 70 * sc - (this.ngoi ? 12 : 0), 15 * sc, 16 * sc, this.da); ctx.beginPath(); ctx.ellipse(p.x, p.y - 75 * sc - (this.ngoi ? 12 : 0), 15.5 * sc, 11 * sc, 0, Math.PI, 0); ctx.fillStyle = this.vt === "bep" ? "#fff" : this.mauToc; ctx.fill();
       if (this.cam) emoji(this.cam, p.x + this.huong * 14, p.y - 44, 18);
-      this.dinh = { x: p.x, y: p.y - (this.ngoi ? 12 : 0) - 90 * sc }; return;
+      this.dinh = { x: p.x, y: p.y - (this.ngoi ? 12 : 0) - 100 * sc }; return;
     }
     const h = this.huong, di = this.dangDi, s = Math.sin(this.buoc), sau = (di && this.sau) || (!di && this.quayLung);
     const nhun = di ? Math.abs(s) * 2.2 : (this.lam ? Math.abs(s) * 1.4 : Math.sin(Date.now() / 520 + this.gx * 3) * 0.6);
     tron(p.x, p.y, 17 * sc, 6.5 * sc, "rgba(0,0,0,.25)");
     ctx.save(); ctx.translate(p.x, p.y - (this.ngoi ? 12 : 0)); ctx.scale(sc, sc);
-    const da = this.da, daToi = sang(da, 0.85), vien = "rgba(60,30,15,.35)";
+    const da = this.da, daToi = sang(da, 0.85), vien = "rgba(50,25,10,.6)";
     if (!this.ngoi) {
       const b1 = di ? s * 5 : 0;
       [[-4.6, Math.max(0, s), b1], [4.6, Math.max(0, -s), -b1]].forEach(([ox, l, sw]) => {
@@ -518,6 +583,7 @@ class NV {
       if (this.caVat) { ctx.fillStyle = "#b71c1c"; ctx.beginPath(); ctx.moveTo(-2, -57); ctx.lineTo(2, -57); ctx.lineTo(3, -40); ctx.lineTo(0, -37); ctx.lineTo(-3, -40); ctx.fill(); }
       if (this.vt === "khach" && !this.caVat && !this.vay) { ctx.fillStyle = sang(this.ao, 0.8); ctx.beginPath(); ctx.moveTo(-5, -59); ctx.lineTo(0, -52); ctx.lineTo(5, -59); ctx.fill(); }
     }
+    ctx.save(); ctx.translate(0, -58); ctx.scale(1.38, 1.38); ctx.translate(0, 58); // dau to kieu hoat hinh
     chuNhatTron(-3.2, -62, 6.4, 5, 2, daToi);
     const hy = -72, fx = sau ? 0 : h * 2.2;
     tron(-11.6, hy + 1, 3, 4, daToi); tron(11.6, hy + 1, 3, 4, daToi);
@@ -558,6 +624,7 @@ class NV {
     if (this.phuKien === 1) { ctx.fillStyle = "#e8d18f"; ctx.beginPath(); ctx.moveTo(-20, hy - 6); ctx.lineTo(20, hy - 6); ctx.lineTo(0, hy - 28); ctx.closePath(); ctx.fill(); ctx.strokeStyle = "#b89a4f"; ctx.lineWidth = 1; ctx.stroke(); ctx.beginPath(); ctx.moveTo(-10, hy - 11); ctx.lineTo(10, hy - 11); ctx.stroke(); }
     if (this.phuKien === 2) { ctx.fillStyle = this.mauMu; ctx.beginPath(); ctx.ellipse(0, hy - 7, 12.6, 8.5, 0, Math.PI, Math.PI * 2); ctx.fill(); if (!sau) chuNhatTron(h > 0 ? 3 : -17, hy - 9, 14, 4, 2, sang(this.mauMu, 0.75)); }
     if (this.vip) emoji("👑", 0, hy - 22, 20);
+    ctx.restore();
     if (this.phuKien === 3 && !this.ngoi) { ctx.strokeStyle = "#5d4037"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(-h * 9, -56); ctx.lineTo(-h * 15, -38); ctx.stroke(); chuNhatTron(-h * 15 - 6, -40, 12, 13, 3, this.gai ? "#ad1457" : "#5d4037"); }
     if (this.phebinh) emoji("📝", -h * 16, -44, 16);
     tay(h);
@@ -567,7 +634,7 @@ class NV {
     if (this.vt === "lc" && !this.cam) { const a = this.lam ? Math.sin(this.buoc * 1.5) * 6 : 0; ctx.strokeStyle = "#8d6e63"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(h * 12, -40); ctx.lineTo(h * 20 + a, -4); ctx.stroke(); ctx.beginPath(); ctx.ellipse(h * 21 + a, -2, 8, 3.5, 0, 0, Math.PI * 2); ctx.fillStyle = "#fbc02d"; ctx.fill(); }
     if (W && W.mua > 0 && this.gy > GY - 0.3 && (this.vt === "khach")) { ctx.strokeStyle = "#424242"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(h * 8, -50); ctx.lineTo(h * 8, -104); ctx.stroke(); ctx.fillStyle = this.mauMu; ctx.beginPath(); ctx.ellipse(h * 8, -104, 26, 13, 0, Math.PI, Math.PI * 2); ctx.fill(); }
     ctx.restore();
-    this.dinh = { x: p.x, y: p.y - (this.ngoi ? 12 : 0) - (92 + nhun) * sc };
+    this.dinh = { x: p.x, y: p.y - (this.ngoi ? 12 : 0) - (106 + nhun) * sc };
   }
 }
 
@@ -669,12 +736,18 @@ function roi(k, vui) {
   k.tt = "ve"; k.vui = vui; k.ngoi = false; k.quayLung = false; k.ban = null; k.ghe = null; k.cuoi = vui > 0.5 ? "😊" : "😡";
   k.duong([CUA, { gx: CUA.gx, gy: LE() }, { gx: k.ben, gy: LE() }], () => { W.khach = W.khach.filter((x) => x !== k); });
 }
+const canXP = (l) => Math.round(30 * Math.pow(l, 1.45));
+function capDo() { let l = 1, x = S.xp || 0; while (x >= canXP(l) && l < 5000) { x -= canXP(l); l++; } return { l, x, can: canXP(l) }; }
+function themXP(n) {
+  S.xp = (S.xp || 0) + n; const c = capDo();
+  if (c.l > (S.capThuong || 1)) { S.capThuong = c.l; const th = Math.round(80 * c.l + (S.thuPhut || 0)); S.tien += th; S.tongThu = (S.tongThu || 0) + th; thongBao(`🎉 Nhà hàng lên cấp ${c.l}! Thưởng ${soTien(th)}`); phaoGiay(0); }
+}
 function traTien(k) {
   const b = k.ban, p = iso(b.gx, b.gy, 40), tile = Math.max(0, k.kien / k.kienMax);
   const boa = Math.round(k.ds.reduce((t, i) => t + MON[i].gia, 0) * (0.25 + ST.boa) * tile * heGia());
   let tong = k.ds.reduce((t, i) => t + giaMon(i), 0) + boa; if (k.vip) tong *= 3; if (W.buff.tien > 0) tong *= 2; if (W.caoDiem) tong *= 1 + ST.cao; if (W.sk && W.sk.loai === "lehoi") tong *= 2 + ST.sk; tong = Math.round(tong);
   if (k.phebinh && tile > 0.3) { const th = Math.round(tong * 15 * (1 + ST.pb)); tong += th; thongBao("🧐 Nhà phê bình khen ngon! Thưởng " + soTien(th)); keu(1175, .2, "triangle", .06); }
-  S.tien += tong; S.tong++; W.thu += tong; S.tongThu = (S.tongThu || 0) + tong;
+  S.tien += tong; S.tong++; W.thu += tong; S.tongThu = (S.tongThu || 0) + tong; themXP(1 + k.ds.length + (k.vip ? 4 : 0) + (k.phebinh ? 20 : 0));
   chu("+" + soTien(tong), p.x, p.y - 30, "#ffd54a");
   for (let i = 0; i < Math.min(8, 2 + Math.floor(Math.log10(tong + 1) * 1.5)); i++) W.xu.push({ x: p.x + (Math.random() - .5) * 30, y: p.y, vx: (Math.random() - .5) * 120, vy: -150 - Math.random() * 80, t: 0 });
   tingTien();
@@ -736,7 +809,7 @@ function capPV() {
           const x = cam[n][0]; p.cam = cam.slice(n, n + 2).map(([y]) => MON[y.mi].b).join("");
           p.di(x.b.ax, x.b.ay, () => {
             if (x.k.ban === x.b && x.k.tt === "doi") {
-              const j = x.k.conLai.indexOf(x.mi); if (j >= 0) x.k.conLai.splice(j, 1); x.b.mon = x.mi; keu(660, .07, "triangle", .05);
+              const j = x.k.conLai.indexOf(x.mi); if (j >= 0) x.k.conLai.splice(j, 1); x.b.mon = x.mi; p.lan++; keu(660, .07, "triangle", .05);
               if (!x.k.conLai.length) { x.k.tt = "an"; x.k.henAn = 3 + Math.random() * 2 + x.k.ds.length; } else x.k.kien = Math.min(x.k.kienMax, x.k.kien + 0.3 * x.k.kienMax);
             }
             giao(n + 1);
@@ -763,7 +836,7 @@ function capLC() {
     const r = W.rac.find((x) => !x.nhan); if (!r) return;
     r.nhan = p; p.viec = r;
     p.di(r.gx + 0.3, r.gy + 0.2, () => p.cho(0.7 / (1 + ST.don), () => {
-      W.rac = W.rac.filter((x) => x !== r); const q = iso(r.gx, r.gy, 10);
+      W.rac = W.rac.filter((x) => x !== r); p.lan++; const q = iso(r.gx, r.gy, 10);
       for (let i = 0; i < 6; i++) W.hat.push({ x: q.x, y: q.y, vx: (Math.random() - .5) * 90, vy: -60 - Math.random() * 40, t: 0, max: .6, kieu: "sao" });
       p.viec = null; p.di(p.nha.gx, p.nha.gy);
     }));
@@ -788,9 +861,9 @@ const CAM = { z: 1, x: 0, y: 0, tuDong: true };
 function vuaKhung() {
   const pts = [iso(-0.3, -0.3, 160), iso(GX + 0.3, -0.3, 160), iso(GX + 0.5, GY + 1.6), iso(-0.5, GY + 1.6), iso(GX + 0.5, GY + 0.5)];
   const minX = Math.min(...pts.map((p) => p.x)), maxX = Math.max(...pts.map((p) => p.x)), minY = Math.min(...pts.map((p) => p.y)), maxY = Math.max(...pts.map((p) => p.y));
-  const tren = 64, duoi = 34;
-  CAM.z = Math.max(0.12, Math.min(1.5, (LW - 30) / (maxX - minX), (LH - tren - duoi) / (maxY - minY)));
-  CAM.x = LW / 2 - CAM.z * (minX + maxX) / 2; CAM.y = tren + (LH - tren - duoi) / 2 - CAM.z * (minY + maxY) / 2;
+  const tren = 70, duoi = 92, PW = $("#nvPanel") && !$("#nvPanel").classList.contains("an") ? 190 : 0;
+  CAM.z = Math.max(0.12, Math.min(1.5, (LW - 30 - PW) / (maxX - minX), (LH - tren - duoi) / (maxY - minY)));
+  CAM.x = (LW - PW) / 2 - CAM.z * (minX + maxX) / 2; CAM.y = tren + (LH - tren - duoi) / 2 - CAM.z * (minY + maxY) / 2;
 }
 function phong(f, sx, sy) {
   const z = Math.max(0.12, Math.min(3, CAM.z * f)); f = z / CAM.z;
@@ -812,6 +885,7 @@ const nhaTay = (e) => {
     const wx = (p.x - CAM.x) / CAM.z, wy = (p.y - CAM.y) / CAM.z;
     if (W.hopQua && W.hopQua.sx !== undefined && Math.hypot(wx - W.hopQua.sx, wy - W.hopQua.sy) < 48) { const th = Math.round((100 + (S.thuPhut || 0) * 0.6) * (1 + ST.qua)); S.tien += th; W.thu += th; S.tongThu = (S.tongThu || 0) + th; S.soQua = (S.soQua || 0) + 1;
       chu("🎁 +" + soTien(th), W.hopQua.sx, W.hopQua.sy - 30, "#ffeb3b"); thongBao("🎁 Anh nhặt được hộp quà: +" + soTien(th)); tingTien(); W.hopQua = null; return; }
+    if (W.bien && Math.hypot(wx - W.bien.x, wy - W.bien.y) < 45) { moCH(0); return; }
     W.lo.forEach((l) => { if (l.phieu && l.toaDo && Math.hypot(wx - l.toaDo.x, (wy - l.toaDo.y) * 1.4) < 55) { l.giuc = 1.2; keu(880, .05, "triangle", .05); chu("Nhanh lên!", l.toaDo.x, l.toaDo.y - 50, "#ffffff"); } });
   }
 };
@@ -821,9 +895,9 @@ cv.addEventListener("wheel", (e) => { e.preventDefault(); const p = toaDo(e); ph
 // ======================================================================
 // VE CANH
 // ======================================================================
-const SAN = [["#f6d9a8", "#eec98d"], ["#fbefd9", "#f1dcc0"], ["#ffffff", "#e3e8ee"], ["#b97a4b", "#a8693c"], ["#e3f2fd", "#bbdefb"], ["#5d5650", "#6d645c"]];
-const TUONG = [["#ffe7c2", "#f7d7a8"], ["#d9f3e8", "#c3e8d7"], ["#ffe0e8", "#f7cbd6"], ["#f6e7b0", "#e9d48d"], ["#dbeafe", "#c3d9f7"], ["#a1887f", "#8d6e63"]];
-const kieuSan = () => Math.min(5, Math.floor(S.cap.san / 15)), kieuTuong = () => Math.min(5, Math.floor(S.cap.tuongson / 15)), kieuBan = () => Math.min(3, Math.floor(S.cap.bansang / 20));
+const SAN = [["#ffffff", "#c8202f"], ["#fbefd9", "#f1dcc0"], ["#ffffff", "#e3e8ee"], ["#b97a4b", "#a8693c"], ["#e3f2fd", "#bbdefb"], ["#5d5650", "#6d645c"]];
+const TUONG = [["#5e4d44", "#4d3e37"], ["#d9f3e8", "#c3e8d7"], ["#ffe0e8", "#f7cbd6"], ["#f6e7b0", "#e9d48d"], ["#dbeafe", "#c3d9f7"], ["#a1887f", "#8d6e63"]];
+const kieuSan = () => (S.giuKieu !== false ? 0 : Math.min(5, Math.floor(S.cap.san / 15))), kieuTuong = () => (S.giuKieu !== false ? 0 : Math.min(5, Math.floor(S.cap.tuongson / 15))), kieuBan = () => Math.min(3, Math.floor(S.cap.bansang / 20));
 let nenSan = null, khoaSan = "";
 function veNenSan() { // ve san vao bo nho tam, chi ve lai khi quan doi
   const x0 = iso(0, GY).x, x1 = iso(GX, 0).x, y1 = iso(GX, GY).y, w = x1 - x0, h = y1;
@@ -840,6 +914,11 @@ function veSanVao(c) {
     const A = iso(x, y), B = iso(x + 1, y), C = iso(x + 1, y + 1), D = iso(x, y + 1);
     if (y < 3) { P([A, B, C, D], (x + y) % 2 ? "#e9eef2" : "#d6dee4", "rgba(0,0,0,.05)"); continue; }
     if (x < 2) { P([A, B, C, D], (x + y) % 2 ? "#f2e2c4" : "#e9d4ae", "rgba(0,0,0,.05)"); continue; }
+    if (ks === 0) { // caro do trang, moi o chia 2x2
+      const Q = (u, v) => ({ x: A.x + (B.x - A.x) * u + (D.x - A.x) * v, y: A.y + (B.y - A.y) * u + (D.y - A.y) * v });
+      for (let i = 0; i < 2; i++) for (let j = 0; j < 2; j++) P([Q(i / 2, j / 2), Q((i + 1) / 2, j / 2), Q((i + 1) / 2, (j + 1) / 2), Q(i / 2, (j + 1) / 2)], (i + j) % 2 ? "#c8202f" : "#fbfbfb");
+      continue;
+    }
     P([A, B, C, D], SAN[ks][(x + y) % 2], "rgba(0,0,0,.05)");
     c.lineWidth = 1;
     if (ks === 0 || ks === 3) { c.strokeStyle = ks ? "rgba(60,25,5,.18)" : "rgba(120,70,20,.12)"; for (const k of ks ? [0.33, 0.66] : [0.5]) { const a = L(A, D, k), b = L(B, C, k); c.beginPath(); c.moveTo(a.x, a.y); c.lineTo(b.x, b.y); c.stroke(); } }
@@ -856,23 +935,32 @@ function veSanVao(c) {
 function veNgoai() {
   const dm = W.dem;
   // co, via he, duong pho
-  poly([iso(-14, -6), iso(GX + 14, -6), iso(GX + 14, GY + 9), iso(-14, GY + 9)], tronMau(["#9ccc65", "#8bc34a", "#c0b25a", "#e3ecef"][W.tiet || 0], "#2f4f2f", dm * 0.7));
-  poly([iso(-14, GY), iso(GX + 14, GY), iso(GX + 14, GY + 1.6), iso(-14, GY + 1.6)], tronMau("#d7ccc8", "#5d5552", dm * 0.6));
-  for (let x = -14; x < GX + 14; x += 1) poly([iso(x, GY + 1.6), iso(x + 0.04, GY + 1.6), iso(x + 0.04, GY), iso(x, GY)], "rgba(0,0,0,.06)");
+  poly([iso(-14, -9), iso(GX + 14, -9), iso(GX + 14, GY + 9), iso(-14, GY + 9)], tronMau(["#93d35a", "#86c94c", "#c0b25a", "#e3ecef"][W.tiet || 0], "#2f4f2f", dm * 0.7));
+  for (let x = -14; x < GX + 14; x += 2) poly([iso(x, -9), iso(x + 1, -9), iso(x + 1, GY), iso(x, GY)], "rgba(255,255,255,.05)");
+  poly([iso(-14, GY), iso(GX + 14, GY), iso(GX + 14, GY + 1.6), iso(-14, GY + 1.6)], tronMau("#c9c2b8", "#5d5552", dm * 0.6));
+  ctx.strokeStyle = "rgba(90,80,70,.28)"; ctx.lineWidth = 1; ctx.beginPath();
+  for (let r = 0; r < 4; r++) { const y = GY + r * 0.4; for (let x = -14 + (r % 2) * 0.25; x < GX + 14; x += 0.5) { const a = iso(x, y), b = iso(x, y + 0.4); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); } const a = iso(-14, y), b = iso(GX + 14, y); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); }
+  ctx.stroke();
   poly([iso(-14, GY + 1.6), iso(GX + 14, GY + 1.6), iso(GX + 14, GY + 4.2), iso(-14, GY + 4.2)], tronMau("#616161", "#262626", dm * 0.6));
   poly([iso(-14, GY + 1.6), iso(GX + 14, GY + 1.6), iso(GX + 14, GY + 1.72), iso(-14, GY + 1.72)], "#9e9e9e");
-  for (let x = -14; x < GX + 14; x += 2) poly([iso(x, GY + 2.86), iso(x + 1, GY + 2.86), iso(x + 1, GY + 2.94), iso(x, GY + 2.94)], "#fff59d");
+  poly([iso(-14, GY + 2.78), iso(GX + 14, GY + 2.78), iso(GX + 14, GY + 2.84), iso(-14, GY + 2.84)], "#fdd835");
+  poly([iso(-14, GY + 2.94), iso(GX + 14, GY + 2.94), iso(GX + 14, GY + 3.0), iso(-14, GY + 3.0)], "#fdd835");
+  for (let x = -14; x < GX + 14; x += 2) poly([iso(x, GY + 4.0), iso(x + 1, GY + 4.0), iso(x + 1, GY + 4.06), iso(x, GY + 4.06)], "#eeeeee");
 }
 function veTuong() {
   const H = 110, dm = W.dem, kt = kieuTuong();
   const t1 = [iso(0, 0), iso(GX, 0)], t2 = [iso(0, 0), iso(0, GY)], U = (p, z) => ({ x: p.x, y: p.y - z });
   poly([t1[0], t1[1], U(t1[1], H), U(t1[0], H)], TUONG[kt][0]);
   poly([t2[0], t2[1], U(t2[1], H), U(t2[0], H)], TUONG[kt][1]);
+  if (!kt) { ctx.strokeStyle = "rgba(0,0,0,.16)"; ctx.lineWidth = 2;
+    for (let q = 0.5; q < GX; q += 0.5) { const a = iso(q, 0, 16), b = iso(q, 0, H); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+    for (let q = 0.5; q < GY; q += 0.5) { const a = iso(0, q, 16), b = iso(0, q, H); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); } }
   if (kt) { ctx.strokeStyle = kt === 3 ? "rgba(190,140,30,.35)" : kt === 5 ? "rgba(60,30,10,.25)" : "rgba(255,255,255,.45)"; ctx.lineWidth = kt === 5 ? 2 : 5;
     for (let q = 0.5; q < GX; q += kt === 5 ? 0.5 : 1) { const a = iso(q, 0, 16), b = iso(q, 0, H); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
     for (let q = 0.5; q < GY; q += kt === 5 ? 0.5 : 1) { const a = iso(0, q, 16), b = iso(0, q, H); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); } }
-  poly([t1[0], t1[1], U(t1[1], 16), U(t1[0], 16)], "#b5651d"); poly([t2[0], t2[1], U(t2[1], 16), U(t2[0], 16)], "#a0561a");
-  poly([U(t1[0], H), U(t1[1], H), U(t1[1], H + 9), U(t1[0], H + 9)], "#e4572e"); poly([U(t2[0], H), U(t2[1], H), U(t2[1], H + 9), U(t2[0], H + 9)], "#c2401d");
+  poly([t1[0], t1[1], U(t1[1], 16), U(t1[0], 16)], kt ? "#b5651d" : "#3a2c25"); poly([t2[0], t2[1], U(t2[1], 16), U(t2[0], 16)], kt ? "#a0561a" : "#30241e");
+  poly([U(t1[0], H), U(t1[1], H), U(t1[1], H + 9), U(t1[0], H + 9)], kt ? "#e4572e" : "#2f221b"); poly([U(t2[0], H), U(t2[1], H), U(t2[1], H + 9), U(t2[0], H + 9)], kt ? "#c2401d" : "#271c16");
+  poly([U(t1[0], H + 9), U(t1[1], H + 9), iso(GX, -0.25, H + 9), iso(0, -0.25, H + 9)], "#8d6e63"); poly([U(t2[0], H + 9), iso(-0.25, 0, H + 9), iso(-0.25, GY, H + 9), U(t2[1], H + 9)], "#795548");
   // mui hut khoi tren moi bep
   W.lo.forEach((l) => { const a = iso(l.gx + 0.1, 0, 72), b = iso(l.gx + 1.3, 0, 72); poly([a, b, U(b, 26), { x: a.x + 6, y: a.y - 26 }], "#b0bec5", "rgba(0,0,0,.2)"); poly([U(a, 26), U(b, 26), U(b, 36), U(a, 36)], "#90a4ae"); });
   // tu ke bep tren tuong trai
@@ -903,12 +991,15 @@ function veTuong() {
   const treo = TT.filter((t) => t.kieu === "tuong" && S.tt[t.id]), cho = [...BC.tuongSau.map((p) => ({ s: 1, p })), ...BC.tuongTrai.map((p) => ({ s: 0, p }))];
   treo.forEach((t, i) => { const o = cho[i]; if (!o) return; const P = (k, z) => (o.s ? iso(o.p + k, 0, z) : iso(0, o.p + k, z)); const a = P(-0.55, 44), b = P(0.55, 44);
     poly([a, b, U(b, 40), U(a, 40)], "#fff8e1", "#8d6e63"); const m = P(0, 64); emoji(t.b, m.x, m.y, 26); });
+  cho.slice(treo.length).forEach((o, i) => { if (i % 2) return; const P = (k, z) => (o.s ? iso(o.p + k, 0, z) : iso(0, o.p + k, z)); // tranh mac dinh
+    poly([P(-0.42, 46), P(0.42, 46), P(0.42, 82), P(-0.42, 82)], "#d4a74a", "#7a5a1e"); poly([P(-0.34, 50), P(0.34, 50), P(0.34, 78), P(-0.34, 78)], ["#aee3f5", "#ffe0b2", "#c8e6c9"][i % 3]);
+    poly([P(-0.34, 50), P(0.34, 50), P(0.34, 58), P(0, 66), P(-0.34, 57)], ["#7cb342", "#e57373", "#64b5f6"][i % 3]); const c = P(0.16, 72); tron(c.x, c.y, 3.5, 3.5, "#fff59d"); });
   if (S.tt.den) for (let gx = 3; gx < GX - 1; gx += 4) { const p = iso(gx, 0, 100); ctx.strokeStyle = "#5d4037"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x, p.y + 14); ctx.stroke();
     if (dm > .15) { ctx.globalAlpha = dm * .45; tron(p.x, p.y + 30, 36, 36, "#ffcc80"); ctx.globalAlpha = 1; } tron(p.x, p.y + 30, 13, 17, "#e53935"); tron(p.x, p.y + 30, 6, 13, "#ff8a65"); ctx.fillStyle = "#ffd54a"; ctx.fillRect(p.x - 7, p.y + 12, 14, 3); ctx.fillRect(p.x - 7, p.y + 46, 14, 3); }
 }
 function veBan(b, ds) {
-  const kb = kieuBan(), mauMat = ["#c98b4e", "#8d5524", "#f5f5f5", "#ffd54a"][kb], khan = S.cap.khantrai > 0, L = b.L, x0 = b.gx - L / 2, y0 = b.gy - 0.42;
-  const mauGhe = ["#e4572e", "#ff8f00", "#b71c1c", "#6a1b9a"][kb], mauTua = sang(mauGhe, 0.8), mauGo = kb === 1 ? "#4e342e" : "#6d4c41";
+  const kb = kieuBan(), mauMat = ["#a8743f", "#8d5524", "#f5f5f5", "#ffd54a"][kb], khan = S.cap.khantrai > 0, L = b.L, x0 = b.gx - L / 2, y0 = b.gy - 0.42;
+  const mauGhe = ["#8a5a33", "#ff8f00", "#b71c1c", "#6a1b9a"][kb], mauTua = sang(mauGhe, 0.8), mauGo = kb === 1 ? "#4e342e" : "#6d4c41";
   const ghe = (c) => {
     const x = c.sx, y = c.sy;
     [[-0.22, -0.18], [0.18, -0.18], [-0.22, 0.18], [0.18, 0.18]].forEach(([a, d]) => hop(x + a, y + d, 0.05, 0.05, 11, "#5d4037"));
@@ -926,7 +1017,7 @@ function veBan(b, ds) {
       poly([iso(x0 + 0.04, y0 + 0.04, 26.2), iso(x0 + L - 0.04, y0 + 0.04, 26.2), iso(x0 + L - 0.04, y0 + 0.8, 26.2), iso(x0 + 0.04, y0 + 0.8, 26.2)], ["#ffffff", "#fff3e0", "#e8f5e9", "#fce4ec"][S.cap.khantrai % 4]);
       poly([iso(x0 + 0.04, b.gy - 0.07, 26.3), iso(x0 + L - 0.04, b.gy - 0.07, 26.3), iso(x0 + L - 0.04, b.gy + 0.07, 26.3), iso(x0 + 0.04, b.gy + 0.07, 26.3)], "rgba(228,87,46,.55)");
     }
-    { const q = iso(x0 + L - 0.25, b.gy, 27); emoji(kb >= 2 ? "🌷" : "🧂", q.x, q.y - 7, kb >= 2 ? 15 : 11); }
+    { const q = iso(b.gx, b.gy, 27); if (kb >= 2) emoji("🌷", q.x, q.y - 7, 15); else veNen(q.x, q.y); }
     b.cho.forEach((c) => { const q = iso(c.gx, c.gy, 27);
       if (c.mon !== null && c.mon !== undefined) { tron(q.x, q.y, 13, 6, "#fff"); tron(q.x, q.y, 9, 4, "#eceff1"); emoji(MON[c.mon].b, q.x, q.y - 8, 20); }
       else if (c.ban) { tron(q.x - 4, q.y, 11, 5, "#fff"); tron(q.x + 6, q.y + 2, 8, 4, "#e0e0e0"); emoji("🥢", q.x, q.y - 5, 12); }
@@ -934,6 +1025,12 @@ function veBan(b, ds) {
     if (b.moi > 0) { const q = iso(b.gx, b.gy, 26); ctx.strokeStyle = `rgba(255,213,74,${b.moi})`; ctx.lineWidth = 4; ctx.beginPath(); ctx.ellipse(q.x, q.y, 40 + L * 22 + (0.8 - b.moi) * 40, 20 + L * 8 + (0.8 - b.moi) * 20, 0, 0, Math.PI * 2); ctx.stroke(); }
     b.cho.filter((c) => c.s).forEach((c) => { ghe(c); if (dangNgoi(c)) c.khach.ve(); tuaTruoc(c); });
   } });
+}
+function veNen(x, y) { // nen thap tren ban
+  const dm = W.dem, f = 1 + Math.sin(Date.now() / 110 + x) * 0.12;
+  tron(x, y, 9, 4, "#9e9e9e"); chuNhatTron(x - 3.5, y - 17, 7, 15, 2.5, "#fff8e1", "rgba(0,0,0,.15)");
+  ctx.globalAlpha = 0.3 + 0.4 * dm; tron(x, y - 23, 9 * f + dm * 10, 9 * f + dm * 10, "#ffcc80"); ctx.globalAlpha = 1;
+  ctx.beginPath(); ctx.ellipse(x, y - 23, 3.4, 6 * f, 0, 0, Math.PI * 2); ctx.fillStyle = "#ff9800"; ctx.fill(); tron(x, y - 21.5, 1.7, 3.2, "#fff59d");
 }
 function veDoSan(ds) {
   const vat = TT.filter((t) => ["vat", "beca", "piano", "phunnuoc"].includes(t.kieu) && S.tt[t.id]);
@@ -992,6 +1089,7 @@ function vePho(ds) {
     if (dm > .2) { const q = iso(x.gx + (x.v > 0 ? 0.95 : -0.95), x.gy, 12); tron(q.x, q.y, 5, 4, "#fff59d"); }
   } }));
   W.qua.forEach((n) => ds.push({ d: n.gx + n.gy, f: () => n.ve() }));
+  veVuon(ds);
   if (S.cap.sanngoai) for (let i = 0; i < Math.min(10, 1 + Math.floor(S.cap.sanngoai / 4)); i++) { const gx = GX + 1.3 + (i % 2) * 1.7, gy = 1.2 + Math.floor(i / 2) * 2.1; if (gy > GY - 0.5) break;
     ds.push({ d: gx + gy, f: () => { const p = iso(gx, gy); tron(p.x, p.y, 26, 10, "rgba(0,0,0,.18)"); hop(gx - 0.25, gy - 0.25, 0.5, 0.5, 20, "#fff8e1"); chuNhatTron(p.x - 1.5, p.y - 66, 3, 48, 1, "#8d6e63");
       const mo = ["#e53935", "#1e88e5", "#43a047", "#fb8c00"][i % 4]; ctx.beginPath(); ctx.ellipse(p.x, p.y - 66, 36, 13, 0, Math.PI, 0); ctx.fillStyle = mo; ctx.fill(); ctx.beginPath(); ctx.ellipse(p.x, p.y - 66, 36, 5, 0, 0, Math.PI); ctx.fillStyle = sang(mo, 0.75); ctx.fill();
@@ -1000,6 +1098,33 @@ function vePho(ds) {
   if (S.cap.canhquan) ds.push({ d: GX + 2 + GY - 3, f: () => { const p = iso(GX + 3.2, GY - 3.2); tron(p.x, p.y, 92, 40, "#8d6e63"); tron(p.x, p.y - 2, 84, 35, tronMau("#4fc3f7", "#1a3a5a", W.dem * .6));
     for (let k = 0; k < 6; k++) { const a = k * 1.1 + Date.now() / 4000; emoji(k % 3 ? "🌸" : "🐸", p.x + Math.cos(a) * 50, p.y + Math.sin(a) * 18, k % 3 ? 16 : 18); } tron(p.x - 30, p.y + 4, 14, 6, "#66bb6a"); tron(p.x + 34, p.y - 8, 12, 5, "#66bb6a"); } });
   if (S.cap.baixe) for (let i = 0; i < Math.min(16, 2 + Math.floor(S.cap.baixe / 3)); i++) { const gx = CUA.gx + 1.8 + i * 0.8; if (gx > GX + 6) break; ds.push({ d: gx + GY + 0.7, f: () => { const p = iso(gx, GY + 0.7); tron(p.x, p.y, 16, 5, "rgba(0,0,0,.2)"); emoji(i % 3 ? "🛵" : "🏍️", p.x, p.y - 13, 26); } }); }
+}
+function veVuon(ds) {
+  const dm = W.dem;
+  // vuon rau phia sau ben phai, co hang rao go
+  const x0 = GX + 1.4, x1 = GX + 8.4, y0 = -7, y1 = -1.2, RAU = ["🥬", "🥕", "🌽", "🍅", "🥦", "🧅"];
+  ds.push({ d: x0 + y0 - 5, f: () => { poly([iso(x0, y0), iso(x1, y0), iso(x1, y1), iso(x0, y1)], tronMau("#8d6e4a", "#3b2e22", dm * .6));
+    ctx.strokeStyle = "rgba(60,40,20,.45)"; ctx.lineWidth = 3; ctx.beginPath(); for (let x = x0 + 0.6; x < x1; x += 1.0) { const a = iso(x, y0 + 0.3), b = iso(x, y1 - 0.3); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); } ctx.stroke(); } });
+  for (let x = x0 + 0.6, k = 0; x < x1; x += 1.0, k++) for (let y = y0 + 0.8; y < y1 - 0.3; y += 1.1) { const b = RAU[k % RAU.length]; ds.push({ d: x + y, f: () => { const p = iso(x, y); emoji(b, p.x, p.y - 9, 20); } }); }
+  const coc = []; for (let x = x0; x <= x1 + 0.01; x += 0.8) coc.push([x, y1]); for (let y = y0; y < y1; y += 0.8) coc.push([x0, y]);
+  coc.forEach(([x, y]) => ds.push({ d: x + y + 0.2, f: () => { hop(x - 0.07, y - 0.07, 0.14, 0.14, 26, "#c69c6d");
+    if (y === y1 && x + 0.8 <= x1 + 0.01) { hop(x, y - 0.03, 0.8, 0.06, 4, "#d7b48a", 9); hop(x, y - 0.03, 0.8, 0.06, 4, "#d7b48a", 19); }
+    if (x === x0 && y + 0.8 <= y1) { hop(x - 0.03, y, 0.06, 0.8, 4, "#d7b48a", 9); hop(x - 0.03, y, 0.06, 0.8, 4, "#d7b48a", 19); } } }));
+  // vuon nho ben trai: bui cay xen nha ve sinh
+  const v0 = -6.4, v1 = -1.4, w0 = GY - 6, w1 = GY - 0.8;
+  ds.push({ d: v0 + w0 - 3, f: () => poly([iso(v0, w0), iso(v1, w0), iso(v1, w1), iso(v0, w1)], tronMau("#a5dc6a", "#334d2a", dm * .6)) });
+  [[v0, w0, v1 - v0, 0.45], [v0, w1 - 0.45, 1.6, 0.45], [v1 - 1.6, w1 - 0.45, 1.6, 0.45], [v0, w0, 0.45, w1 - w0], [v1 - 0.45, w0, 0.45, w1 - w0 - 2.2]].forEach(([x, y, w, d]) =>
+    ds.push({ d: x + w + y + d - 0.4, f: () => { hop(x, y, w, d, 22, "#3f9b46"); const t = iso(x + w / 2, y + d / 2, 24); for (let k = 0; k < 4; k++) tron(t.x + (k - 1.5) * 9, t.y + Math.sin(k) * 2, 4, 3, "rgba(255,255,255,.18)"); } }));
+  for (let r = 0; r < 2; r++) for (let c = 0; c < 3; c++) { const gx = v0 + 1.4 + c * 1.3, gy = w0 + 1.4 + r * 2.0;
+    ds.push({ d: gx + gy, f: () => { const p = iso(gx, gy); tron(p.x, p.y, 13, 6, "rgba(0,0,0,.18)");
+      chuNhatTron(p.x - 9, p.y - 38, 18, 20, 4, "#fafafa", "#9e9e9e"); chuNhatTron(p.x - 6, p.y - 16, 12, 15, 4, "#f5f5f5", "#9e9e9e");
+      ctx.beginPath(); ctx.ellipse(p.x, p.y - 18, 12, 6, 0, 0, Math.PI * 2); ctx.fillStyle = "#ffffff"; ctx.fill(); ctx.strokeStyle = "#9e9e9e"; ctx.lineWidth = 1.5; ctx.stroke(); tron(p.x, p.y - 18, 7, 3, "#b3e5fc"); } }); }
+  // bien dat mo rong (cham vao de mo rong quan)
+  const bx = GX + 1.7, by = GY - 0.8;
+  ds.push({ d: bx + by, f: () => { const p = iso(bx, by), nh = Math.sin(Date.now() / 400) * 2; chuNhatTron(p.x - 2.5, p.y - 46, 5, 46, 2, "#6d4c41");
+    ctx.save(); ctx.translate(p.x, p.y - 60 + nh); ctx.rotate(-0.12); chuNhatTron(-40, -18, 80, 34, 6, "#ffb74d", "#6d4c41");
+    ctx.font = "900 13px Segoe UI, Roboto, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillStyle = "#6d2c00"; ctx.fillText("MỞ RỘNG!", 0, -6); ctx.font = "800 10px Segoe UI, Roboto, sans-serif"; ctx.fillText("chạm để nâng cấp", 0, 8); ctx.restore();
+    W.bien = { x: p.x, y: p.y - 60 }; } });
 }
 function veBong(n, chuB, tile) {
   if (!n.dinh) return;
@@ -1154,6 +1279,8 @@ function hud(dt) {
   $("#hMon").textContent = W.monNgay !== undefined ? "🌟 Món hôm nay: " + MON[W.monNgay].b + " " + MON[W.monNgay].ten : "";
   const s = sao(); if (W.saoCu && s > W.saoCu) phaoGiay(s); W.saoCu = s;
   $("#tSao").innerHTML = "★".repeat(s) + "<i>" + "★".repeat(5 - s) + "</i>";
+  const c = capDo(); $("#tCap").textContent = c.l; $("#thanhXP b").style.width = (100 * c.x / c.can) + "%"; $("#tXP").textContent = soTien(c.x) + " / " + soTien(c.can) + " kinh nghiệm";
+  { const d = diemDep(), fr = s >= 5 ? 1 : Math.max(0, Math.min(1, (d - MOC_SAO[s - 1]) / (MOC_SAO[s] - MOC_SAO[s - 1]))); $("#tDiem").textContent = (s >= 5 ? 50 : 10 * (s - 1) + 10 * fr).toFixed(1).replace(".", ",") + "/50"; }
   const d = diemDep(); $("#thanhSao b").style.width = (s >= 5 ? 100 : 100 * (d - MOC_SAO[s - 1]) / (MOC_SAO[s] - MOC_SAO[s - 1])) + "%";
 }
 let ac = null;
@@ -1180,6 +1307,8 @@ function doc() {
     S.mon = MON.map((m, i) => (Array.isArray(s.mon) && typeof s.mon[i] === "number" ? Math.max(0, Math.floor(s.mon[i])) : i < 3 ? 1 : 0));
     S.tt = {}; for (const t of TT) if (s.tt && +s.tt[t.id] > 0) S.tt[t.id] = Math.floor(+s.tt[t.id]);
     for (const k of ["tien", "tong", "mat", "thuPhut", "tongThu", "soQua"]) if (typeof S[k] !== "number" || !isFinite(S[k])) S[k] = k === "tien" ? 150 : 0;
+    if (typeof s.xp !== "number" || !isFinite(s.xp)) S.xp = (S.tong || 0) * 3;
+    if (typeof s.capThuong !== "number") S.capThuong = capDo().l;
     if (!S.nv || typeof S.nv !== "object") S.nv = {}; if (typeof S.ten !== "string" || !S.ten.trim()) S.ten = "Nhà hàng Vui Vẻ";
   } catch (e) { S = MAC_DINH(); }
 }
@@ -1190,7 +1319,7 @@ function coGian() {
   const kh = $("#khung"); kh.style.width = LW + "px"; kh.style.height = LH + "px"; kh.style.transform = `scale(${K})`;
   R = Math.min(3, K * (devicePixelRatio || 1));
   cv.width = Math.round(LW * R); cv.height = Math.round(LH * R); cv.style.width = LW + "px"; cv.style.height = LH + "px";
-  const tb = $("#tb"); tb.style.top = LW < 620 ? "auto" : "84px"; tb.style.bottom = LW < 620 ? "96px" : "auto";
+  const tb = $("#tb"); tb.style.top = LW < 620 ? "auto" : "70px"; tb.style.bottom = LW < 620 ? "100px" : "auto";
   if (W && CAM.tuDong) vuaKhung();
 }
 addEventListener("resize", coGian); addEventListener("orientationchange", () => setTimeout(coGian, 300));
@@ -1205,7 +1334,7 @@ const moTaST = (st, c) => Object.entries(st).map(([k, v]) => k === "dep" ? `+${+
 function theUP(u) {
   return { b: u.b, ten: u.ten, cap: () => S.cap[u.id], gia: (c) => giaUP(u, c), lam: () => { S.cap[u.id]++; },
     mo: (c) => { const d = DEM[u.id]; const dau = d ? `Có ${d[0] + Math.floor(c / d[1])} ${d[2]} · cứ ${d[1]} cấp thêm 1. ` : u.id === "dt" ? `Quán rộng thêm ${+(c * 0.12).toFixed(1)} ô. ` :
-        u.id === "san" ? `Kiểu: ${["Sàn gỗ", "Gạch hoa", "Đá cẩm thạch", "Gỗ quý", "Gạch bông xanh", "Đá đen vân vàng"][kieuSan()]} (đổi kiểu mỗi 15 cấp). ` :
+        u.id === "san" ? `Kiểu: ${["Caro đỏ trắng", "Gạch hoa", "Đá cẩm thạch", "Gỗ quý", "Gạch bông xanh", "Đá đen vân vàng"][kieuSan()]} (đổi kiểu mỗi 15 cấp). ` :
         u.id === "tuongson" ? `Màu: ${["Kem", "Xanh ngọc", "Hồng", "Vàng hoàng gia", "Xanh trời", "Ốp gỗ"][kieuTuong()]} (đổi màu mỗi 15 cấp). ` :
         u.id === "bansang" ? `Kiểu bàn ${kieuBan() + 1}/4 (đổi kiểu mỗi 20 cấp). ` : "";
       return dau + "Mỗi cấp: " + moTaST(u.st, 1) + (c ? " · Đang có: " + moTaST(u.st, c) : ""); } };
@@ -1286,9 +1415,39 @@ function tuMua() { // mua mon re nhat trong tat ca
   TT.forEach((t) => xet({ cap: () => S.tt[t.id] || 0, gia: (c) => giaTT(t, c), lam: () => { S.tt[t.id] = (S.tt[t.id] || 0) + 1; } }));
   if (tot && S.tien >= gTot) muaNhieu(tot, 1);
 }
-setInterval(() => { if (chay && S.tuMua) tuMua(); if ($("#ch").classList.contains("mo")) veLai(); $("#nQuay").classList.toggle("san", (S.quayLuc || 0) <= Date.now()); if (!$("#vq").classList.contains("an")) capNhatVQ(); if (W) { const n = soNVXong(); $("#nCH").textContent = "🛒 Nâng cấp" + (n ? " · 🏆" + n : ""); } }, 800);
+setInterval(() => { if (chay && S.tuMua) tuMua(); if ($("#ch").classList.contains("mo")) veLai(); $("#nQuay").classList.toggle("san", (S.quayLuc || 0) <= Date.now()); if (!$("#vq").classList.contains("an")) capNhatVQ(); if (W) { const n = soNVXong(); $("#soNVu").textContent = n; $("#soNVu").classList.toggle("an", !n); } }, 800);
+function anhNV(n) {
+  if (n.anh !== undefined) return n.anh;
+  const c = document.createElement("canvas"); c.width = 96; c.height = 112; const p2 = c.getContext("2d");
+  const giu = { dich: n.dich, hen: n.hen, cam: n.cam, lam: n.lam, ngoi: n.ngoi, quayLung: n.quayLung, huong: n.huong, gx: n.gx, gy: n.gy, vui: n.vui, dinh: n.dinh, sau: n.sau };
+  const cu = ctx, z = CAM.z;
+  try { Object.assign(n, { dich: null, hen: null, cam: null, lam: false, ngoi: false, quayLung: false, sau: false, huong: 1, gx: 0, gy: 0, vui: 1 }); CAM.z = 1; ctx = p2; p2.setTransform(1, 0, 0, 1, 48, 150); n.ve(); n.anh = c.toDataURL(); }
+  catch (e) { n.anh = ""; } finally { ctx = cu; CAM.z = z; Object.assign(n, giu); }
+  return n.anh;
+}
+let nvKhoa = "";
+function veNV() {
+  if (!W) return;
+  const ds = [...W.lo.map((l) => Object.assign(l.dauBep, { _l: l })), ...W.pv, ...W.lc];
+  $("#nvNhan").textContent = "Đội ngũ " + ds.length; $("#nvSo").textContent = ds.length;
+  if ($("#nvPanel").classList.contains("an")) return;
+  const hien = ds.slice(0, 40), khoa = hien.length + "|" + ds.length;
+  const vt = (n) => (n.vt === "bep" ? "Đầu bếp" : n.vt === "pv" ? "Phục vụ" : "Lao công");
+  if (khoa !== nvKhoa) { nvKhoa = khoa;
+    $("#nvDs").innerHTML = hien.map((n, i) => `<div class="nvThe"><div class="h"><span>${n.ten}</span><i id="nvM${i}">😊</i></div><div class="a"><img src="${anhNV(n)}" alt=""></div><div class="s" id="nvS${i}"></div></div>`).join("") +
+      (ds.length > hien.length ? `<div class="nvThe"><div class="s">… và ${ds.length - hien.length} người nữa</div></div>` : ""); }
+  hien.forEach((n, i) => { const e = $("#nvS" + i), m = $("#nvM" + i); if (!e) return; const ban = n.vt === "bep" ? !!(n._l && n._l.phieu) : !!n.viec;
+    e.textContent = vt(n) + " · " + (n.vt === "bep" ? "đã nấu " + soTien((n._l && n._l.daNau) || 0) + " món" : n.vt === "pv" ? "đã bưng " + soTien(n.lan || 0) + " món" : "đã dọn " + soTien(n.lan || 0) + " lần");
+    m.textContent = ban ? "💪" : "😊"; });
+}
+function moCH(t) { if (t !== undefined) tab = t; $("#ch").classList.add("mo"); $("#oTuMua").checked = !!S.tuMua; $("#oGiuKieu").checked = S.giuKieu !== false; veTabs(); veCH(); }
+document.querySelectorAll("#cong [data-tab]").forEach((b) => (b.onclick = () => moCH(+b.dataset.tab)));
+function batNV(mo) { $("#nvPanel").classList.toggle("an", !mo); S.moNV = mo; nvKhoa = ""; veNV(); if (CAM.tuDong) vuaKhung(); }
+$("#nNV").onclick = () => batNV($("#nvPanel").classList.contains("an")); $("#nvDong").onclick = () => batNV(false);
+setInterval(veNV, 800);
+$("#oGiuKieu").onchange = (e) => { S.giuKieu = e.target.checked; khoaSan = ""; sapXep(); luu(); };
 $("#oTuMua").onchange = (e) => { S.tuMua = e.target.checked; luu(); };
-$("#nCH").onclick = () => { $("#ch").classList.add("mo"); $("#oTuMua").checked = !!S.tuMua; veTabs(); veCH(); };
+$("#nCH").onclick = () => moCH();
 $("#nDong").onclick = () => $("#ch").classList.remove("mo");
 $("#ch").addEventListener("click", (e) => { if (e.target.id === "ch") $("#ch").classList.remove("mo"); });
 const VQ = [["💰", "Tiền thưởng lớn"], ["⚡", "Nhân viên nhanh gấp đôi"], ["👥", "Khách đông gấp đôi"], ["💵", "Thu tiền gấp đôi"], ["🎁", "Ba hộp quà"], ["💎", "Tiền thưởng cực lớn"], ["🍀", "Chúc may mắn"], ["🍜", "Món mới miễn phí"]];
@@ -1329,6 +1488,7 @@ $("#nVao").onclick = () => { const t = $("#oTen").value.trim(); if (t) S.ten = t
 // ======================================================================
 if (BAN !== "may-tinh") $("#hdZoom").textContent = "chụm hai ngón";
 doc(); tinhST(); coGian(); dung(); coGian(); $("#oTen").value = S.ten; nhac = !S.nhacTat; $("#nNhac").style.opacity = nhac ? 1 : .5;
+batNV(S.moNV === undefined ? BAN === "may-tinh" && LW >= 1000 : !!S.moNV);
 if (S.tong > 0) {
   const vang = Math.min(480, (Date.now() - (S.luc || Date.now())) / 60000);
   const thu = Math.round(vang * (S.thuPhut || 0) * 0.25 * (1 + ST.vang));
