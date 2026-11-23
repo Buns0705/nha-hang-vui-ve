@@ -1965,7 +1965,7 @@ let nhac = true, nhacBuoc = 0;
 const GIAI = [523, 659, 784, 659, 880, 784, 659, 587, 523, 587, 659, 784, 659, 587, 523, 440];
 function keuNhac(f, d, v) { try { const o = ac.createOscillator(), g = ac.createGain(); o.type = "triangle"; o.frequency.value = f; g.gain.setValueAtTime(v, ac.currentTime); g.gain.exponentialRampToValueAtTime(0.0005, ac.currentTime + d); o.connect(g); g.connect(ac.destination); o.start(); o.stop(ac.currentTime + d); } catch (e) {} }
 setInterval(() => { if (!nhac || nhacYT || !ac || document.hidden || !chay) return; if (nhacBuoc % 2 === 0 || Math.random() < .5) keuNhac(GIAI[nhacBuoc % 16], .35, .02); if (nhacBuoc % 4 === 0) keuNhac([131, 175, 196, 165][Math.floor(nhacBuoc / 4) % 4], .9, .03); nhacBuoc++; }, 300);
-const KENH = [["jfKfPfyJRdk", "🎧 Nhạc lofi thư giãn, phát liên tục (Lofi Girl)"], ["8AlGNENK0tE", "🌧️ Piano và tiếng mưa (Trí Nhật Piano)"], ["BW1T2MZVQIo", "🎹 Piano nhạc Việt tuyển chọn 3 giờ (Alice Piano)"],
+const KENH = [["rFZHOHl-L8A", "🎧 Nhạc lofi thư giãn, phát liên tục (Lofi Girl)"], ["8AlGNENK0tE", "🌧️ Piano và tiếng mưa (Trí Nhật Piano)"], ["BW1T2MZVQIo", "🎹 Piano nhạc Việt tuyển chọn 3 giờ (Alice Piano)"],
   ["1t3qKr_fps4", "☕ Nhạc cà phê Rumba guitar không lời"], ["76EsMpbS_zs", "🎸 Rumba hòa tấu guitar"], ["8nxUmL1iQmo", "📖 Piano nhẹ nhàng đọc sách"], ["77ZozI0rw7w", "💧 Piano và tiếng nước thư giãn"],
   ["4xDzrJKXOOY", "🌆 Nhạc điện tử êm dịu, phát liên tục (Lofi Girl)"]];
 let nhacYT = false;
