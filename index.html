@@ -233,7 +233,8 @@
 
   <div id="md"><div class="bang">
     <h1>🍜 Nhà Hàng Vui Vẻ</h1>
-    <p style="font-weight:900;color:#2e9e6b">Bản 11: hình ảnh mới nổi khối thật (nhân vật, bàn ghế, bếp, cây, xe, món ăn) · cổng chào có tên quán (chạm để đổi tên) · quà đăng nhập mỗi ngày · xe kem, xe bánh mì, xe nước mía trên vỉa hè · khách quen có tên · nút nâng cấp tất cả · bảng tình hình quán · nhạc thư giãn</p>
+    <p style="font-weight:900;color:#c62828">Bản 12: kiếm tiền và thưởng chậm hơn để chơi được lâu · có nút "Chơi tiếp tục" và "Chơi lại từ đầu"</p>
+    <p style="font-weight:900;color:#2e9e6b"> hình ảnh mới nổi khối thật (nhân vật, bàn ghế, bếp, cây, xe, món ăn) · cổng chào có tên quán (chạm để đổi tên) · quà đăng nhập mỗi ngày · xe kem, xe bánh mì, xe nước mía trên vỉa hè · khách quen có tên · nút nâng cấp tất cả · bảng tình hình quán · nhạc thư giãn</p>
     <p>Anh là ông chủ! Khách tự vào quán, đầu bếp tự nấu, phục vụ bưng món và dọn bàn, lao công quét dọn.</p>
     <p>🛒 <b>Nâng cấp không giới hạn</b>: <b id="soUP"></b> loại nâng cấp, <b id="soMon"></b> món ăn, <b id="soTT"></b> đồ trang trí. Thêm bàn là quán tự <b>mở rộng</b>; mỗi bàn <b>4 ghế</b>, nâng cấp ghế ngồi để bàn dài thêm.<br>
       👪 Khách đi theo nhóm · 🚌 Đoàn du lịch · 🧐 Nhà phê bình · 🌧️ Trời mưa · 🎉 Lễ hội · 🎁 Chạm hộp quà để nhận tiền · 🏆 Nhiệm vụ có thưởng<br>🎡 Vòng quay may mắn · ❓ Đố vui ẩm thực · 🥕 Vườn rau (chạm rau chín để nâng cấp món) · 📮 Hộp thư · 🏘️ Hàng xóm · 🎵 Nhạc nền · 🌸 Bốn mùa · 🎆 Pháo hoa ban đêm · 🐈 Thú cưng<br>
@@ -246,7 +247,18 @@
       <button class="nut" id="nNhap" style="font-size:15px;padding:6px 14px;background:linear-gradient(#ffb74d,#f57c00);box-shadow:0 4px 0 #b45309">📥 Nhập mã sao lưu</button></p>
     <textarea id="oMa" class="an" style="width:92%;height:70px;font-size:12px;border-radius:10px;border:2px solid #1e88e5;user-select:text;-webkit-user-select:text"></textarea>
     <p id="tMa" style="font-size:14px;color:#1565c0;font-weight:700"></p>
-    <button class="nut" id="nVao" style="font-size:28px;padding:13px 46px;margin-top:6px">▶ Mở cửa quán</button>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="nut" id="nVao" style="font-size:28px;padding:13px 46px;margin-top:6px">▶ Mở cửa quán</button>
+      <button class="nut an" id="nMoi" style="font-size:22px;padding:13px 26px;margin-top:6px;background:linear-gradient(#ff8a65,#e4572e);box-shadow:0 5px 0 #9b3418">🔄 Chơi lại từ đầu</button>
+    </div>
+    <div id="hoiMoi" class="an" style="margin:12px auto 0;max-width:520px;background:#fff3e0;border:3px solid #e4572e;border-radius:16px;padding:12px">
+      <p style="font-weight:900;color:#c62828;margin:4px">Anh chắc chắn muốn chơi lại từ đầu?</p>
+      <p style="margin:4px">Quán hiện tại (tiền, nâng cấp, món ăn, trang trí) sẽ bị xoá hết. Muốn giữ lại thì bấm "Lấy mã sao lưu" trước.</p>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:8px">
+        <button class="nut" id="moiCo" style="font-size:18px;padding:9px 18px;background:linear-gradient(#ff8a65,#e4572e);box-shadow:0 5px 0 #9b3418">Xoá và chơi mới</button>
+        <button class="nut" id="moiKhong" style="font-size:18px;padding:9px 18px">Không, chơi tiếp</button>
+      </div>
+    </div>
   </div></div>
 </div>
 <div id="yt" class="an"><div class="dau"><span id="ytTen"></span><button id="ytGon" title="Thu gọn">▁</button><button id="ytDong" title="Tắt nhạc">✖</button></div><div id="ytKhung"></div></div>
@@ -522,11 +534,11 @@ const TEN_ST = { nghi: "nhân viên hồi sức nhanh", vuon: "rau lớn nhanh",
   an: "khách ăn nhanh", vip: "khách sang", tuyet: "bếp trưởng nấu xong ngay", cao: "thu giờ cao điểm", vang: "thu khi anh vắng mặt", rac: "ít rác", goi: "khách gọi thêm món", all: "mọi nhân viên nhanh",
   nhom: "khách đi đông người", monngay: "giá món hôm nay", qua: "giá trị hộp quà", sk: "thu ngày lễ hội", mua: "khách vẫn đến khi mưa", pb: "thưởng nhà phê bình", bus: "khách du lịch", nv: "thưởng nhiệm vụ", mm: "thưởng vòng quay",
   xk: "thu xe đẩy vỉa hè", kq: "khách quen boa thêm", dn: "quà đăng nhập" };
-const giaUP = (u, c) => Math.round(u.g * Math.pow(DEM[u.id] ? 1.1 : 1.125, c));
-const giaMonCap = (i, c) => (c ? Math.round(MON[i].gia * 4 * Math.pow(1.11, c)) : MON[i].gia_mo);
-const giaTT = (t, c) => Math.round(t.gia * Math.pow(1.12, c));
+const giaUP = (u, c) => Math.round(u.g * Math.pow(DEM[u.id] ? 1.13 : 1.16, c));
+const giaMonCap = (i, c) => (c ? Math.round(MON[i].gia * 5 * Math.pow(1.14, c)) : Math.round(MON[i].gia_mo * 1.5));
+const giaTT = (t, c) => Math.round(t.gia * 1.3 * Math.pow(1.15, c));
 
-const MAC_DINH = () => ({ xp: 0, capThuong: 1, tien: 150, tong: 0, mat: 0, luc: Date.now(), thuPhut: 0, tuMua: false, tongThu: 0, soQua: 0, nv: {}, kq: {}, ten: "Nhà hàng Vui Vẻ",
+const MAC_DINH = () => ({ xp: 0, capThuong: 1, tien: 120, tong: 0, mat: 0, luc: Date.now(), thuPhut: 0, tuMua: false, tongThu: 0, soQua: 0, nv: {}, kq: {}, ten: "Nhà hàng Vui Vẻ",
   cap: Object.fromEntries(UP.map((u) => [u.id, 0])), mon: MON.map((m, i) => (i < 3 ? 1 : 0)), tt: {} });
 let S = MAC_DINH(), ST = {}, N = {};
 function tinhST() {
@@ -853,7 +865,8 @@ const heGia = () => 1 + 0.18 * (sao() - 1) + diemDep() / 3000;
 const tNghi = () => 6 / (1 + ST.nghi);
 const tocPV = () => Math.min(16, 2.3 * (1 + ST.di + ST.all) * (W && W.buff.nhanh > 0 ? 2 : 1));
 const kienNhan = () => 50 * (1 + ST.kien);
-const giaMon = (i) => Math.round(MON[i].gia * 1.4 * (1 + 0.1 * (S.mon[i] - 1)) * heGia() * (1 + ST.gia) * (W && i === W.monNgay ? 1.5 + ST.monngay : 1));
+const KT = 0.55; // he so kiem tien (choi lau hon)
+const giaMon = (i) => Math.round(MON[i].gia * 1.4 * KT * (1 + 0.1 * (S.mon[i] - 1)) * heGia() * (1 + ST.gia) * (W && i === W.monNgay ? 1.5 + ST.monngay : 1));
 const monMo = () => MON.map((m, i) => i).filter((i) => S.mon[i] > 0);
 const LE = () => GY + 0.8; // via he
 
@@ -910,11 +923,11 @@ function roi(k, vui) {
     return; }
   k.duong([CUA, { gx: CUA.gx, gy: LE() }, { gx: k.ben, gy: LE() }], () => { W.khach = W.khach.filter((x) => x !== k); });
 }
-const canXP = (l) => Math.round(30 * Math.pow(l, 1.45));
+const canXP = (l) => Math.round(40 * Math.pow(l, 1.55));
 function capDo() { let l = 1, x = S.xp || 0; while (x >= canXP(l) && l < 5000) { x -= canXP(l); l++; } return { l, x, can: canXP(l) }; }
 function themXP(n) {
   S.xp = (S.xp || 0) + n; const c = capDo();
-  if (c.l > (S.capThuong || 1)) { S.capThuong = c.l; const th = Math.round(80 * c.l + (S.thuPhut || 0)); S.tien += th; S.tongThu = (S.tongThu || 0) + th; thongBao(`🎉 Nhà hàng lên cấp ${c.l}! Thưởng ${soTien(th)}`); phaoGiay(0); }
+  if (c.l > (S.capThuong || 1)) { S.capThuong = c.l; const th = Math.round(40 * c.l + (S.thuPhut || 0) * 0.5); S.tien += th; S.tongThu = (S.tongThu || 0) + th; thongBao(`🎉 Nhà hàng lên cấp ${c.l}! Thưởng ${soTien(th)}`); phaoGiay(0); }
 }
 function traTien(k) {
   const b = k.ban, p = iso(b.gx, b.gy, 40), tile = Math.max(0, k.kien / k.kienMax);
@@ -1032,7 +1045,7 @@ function capPho(dt) { // nguoi qua duong, xe co
   const xs = xeDay(); if (xs.length) { const pm = Math.min(0.75, 0.3 + ST.xk * 0.15);
     xs.forEach((x) => { x.nh = (W.xeNh && W.xeNh[x.k]) || 0; });
     W.qua.forEach((n) => { if (n.hen) return; n.xet = n.xet || {}; for (const x of xs) { if (n.xet[x.k] || Math.abs(n.gx - x.gx) > 0.15) continue; n.xet[x.k] = 1; if (Math.random() > pm) continue;
-      n.cho(1.3, () => { const t = Math.round((12 + (S.thuPhut || 0) * 0.03) * (1 + ST.xk) * heGia()); S.tien += t; W.thu += t; S.tongThu = (S.tongThu || 0) + t; S.xeThu = (S.xeThu || 0) + t; n.cam = x.b;
+      n.cho(1.3, () => { const t = Math.round((6 + (S.thuPhut || 0) * 0.015) * (1 + ST.xk) * heGia()); S.tien += t; W.thu += t; S.tongThu = (S.tongThu || 0) + t; S.xeThu = (S.xeThu || 0) + t; n.cam = x.b;
         const q = iso(x.gx, x.gy, 60); chu(x.b + " +" + soTien(t), q.x, q.y, "#b3e5fc"); W.xeNh = W.xeNh || {}; W.xeNh[x.k] = 1.2; }); break; } }); }
   if (W.xeNh) for (const k in W.xeNh) if (W.xeNh[k] > 0) W.xeNh[k] -= dt;
 }
@@ -1068,14 +1081,14 @@ const nhaTay = (e) => {
   const p = ngonTay.get(e.pointerId); ngonTay.delete(e.pointerId);
   if (keoDa < 6 && ngonTay.size === 0 && W) { // cham: giuc bep
     const wx = (p.x - CAM.x) / CAM.z, wy = (p.y - CAM.y) / CAM.z;
-    if (W.hopQua && W.hopQua.sx !== undefined && Math.hypot(wx - W.hopQua.sx, wy - W.hopQua.sy) < 48) { const th = Math.round((100 + (S.thuPhut || 0) * 0.6) * (1 + ST.qua)); S.tien += th; W.thu += th; S.tongThu = (S.tongThu || 0) + th; S.soQua = (S.soQua || 0) + 1;
+    if (W.hopQua && W.hopQua.sx !== undefined && Math.hypot(wx - W.hopQua.sx, wy - W.hopQua.sy) < 48) { const th = Math.round((50 + (S.thuPhut || 0) * 0.3) * (1 + ST.qua)); S.tien += th; W.thu += th; S.tongThu = (S.tongThu || 0) + th; S.soQua = (S.soQua || 0) + 1;
       chu("🎁 +" + soTien(th), W.hopQua.sx, W.hopQua.sy - 30, "#ffeb3b"); thongBao("🎁 Anh nhặt được hộp quà: +" + soTien(th)); tingTien(); W.hopQua = null; return; }
     if (W.bien && Math.hypot(wx - W.bien.x, wy - W.bien.y) < 45) { moCH(0); return; }
     if (W.cong && wx > W.cong.x0 && wx < W.cong.x1 && wy > W.cong.y0 && wy < W.cong.y1) { doiTen(); return; }
     if (W.vuon) { const v = W.vuon.find((v) => v.t >= 1 && v.sx !== undefined && Math.hypot(wx - v.sx, wy - v.sy) < 28); if (v) { thuHoach(v); return; } }
-    if (W.mb && Math.hypot(wx - W.mb.x, wy - W.mb.y) < 34) { if ((S.thuLuc || 0) <= Date.now()) { const th = Math.round((80 + (S.thuPhut || 0) * 3) * (1 + ST.thu)); S.tien += th; S.tongThu = (S.tongThu || 0) + th; S.thuLuc = Date.now() + 180000; themXP(5); thongBao("✉️ Thư của khách quen kèm quà: +" + soTien(th)); tingTien(); luu(); } else thongBao("📮 Hộp thư trống, khoảng " + Math.ceil(((S.thuLuc || 0) - Date.now()) / 60000) + " phút nữa có thư mới"); return; }
+    if (W.mb && Math.hypot(wx - W.mb.x, wy - W.mb.y) < 34) { if ((S.thuLuc || 0) <= Date.now()) { const th = Math.round((40 + (S.thuPhut || 0) * 1.5) * (1 + ST.thu)); S.tien += th; S.tongThu = (S.tongThu || 0) + th; S.thuLuc = Date.now() + 180000; themXP(5); thongBao("✉️ Thư của khách quen kèm quà: +" + soTien(th)); tingTien(); luu(); } else thongBao("📮 Hộp thư trống, khoảng " + Math.ceil(((S.thuLuc || 0) - Date.now()) / 60000) + " phút nữa có thư mới"); return; }
     if (W.jb && Math.hypot(wx - W.jb.x, wy - W.jb.y) < 34) { moNhac(); return; }
-    if (W.hx) { const h = W.hx.find((h) => h.sx !== undefined && Math.hypot(wx - h.sx, wy - h.sy) < 70); if (h) { if (h.hen <= W.t) { const th = Math.round((60 + (S.thuPhut || 0) * 2) * (1 + ST.hx)); S.tien += th; S.tongThu = (S.tongThu || 0) + th; h.hen = W.t + 120; themXP(4); thongBao("🏘️ Ghé thăm quán " + h.ten + ", hàng xóm tặng " + soTien(th)); tingTien(); } else thongBao("🏘️ Quán " + h.ten + " đang đông khách, lát nữa anh ghé lại nhé"); return; } }
+    if (W.hx) { const h = W.hx.find((h) => h.sx !== undefined && Math.hypot(wx - h.sx, wy - h.sy) < 70); if (h) { if (h.hen <= W.t) { const th = Math.round((30 + (S.thuPhut || 0) * 1) * (1 + ST.hx)); S.tien += th; S.tongThu = (S.tongThu || 0) + th; h.hen = W.t + 120; themXP(4); thongBao("🏘️ Ghé thăm quán " + h.ten + ", hàng xóm tặng " + soTien(th)); tingTien(); } else thongBao("🏘️ Quán " + h.ten + " đang đông khách, lát nữa anh ghé lại nhé"); return; } }
     W.lo.forEach((l) => { if (l.phieu && l.toaDo && Math.hypot(wx - l.toaDo.x, (wy - l.toaDo.y) * 1.4) < 55) { l.giuc = 1.2; keu(880, .05, "triangle", .05); chu("Nhanh lên!", l.toaDo.x, l.toaDo.y - 50, "#ffffff"); } });
   }
 };
@@ -1601,7 +1614,7 @@ function buoc(dt) {
   W.henQua = (W.henQua === undefined ? 35 : W.henQua) - dt;
   if (W.henQua <= 0) { W.henQua = 45 + Math.random() * 45; const b = W.ban[Math.floor(Math.random() * W.ban.length)]; if (b) W.hopQua = { gx: Math.min(GX - 0.6, b.gx + b.L / 2 + 0.7), gy: b.gy + 1.4, con: 15 }; }
   if (W.hopQua) { W.hopQua.con -= dt; if (W.hopQua.con <= 0) W.hopQua = null; }
-  if (ST.giao > 0) { W.gh = (W.gh || 0) + dt; if (W.gh >= 8) { W.gh = 0; const t = Math.round(10 * ST.giao * heGia() * (1 + ST.gia)); S.tien += t; W.thu += t; S.tongThu = (S.tongThu || 0) + t; const q = iso(CUA.gx, CUA.gy, 70); chu("🛵 +" + soTien(t), q.x, q.y, "#80deea"); const q2 = iso(CUA.gx, LE()); W.hat.push({ x: q2.x, y: q2.y - 20, vx: -170, vy: 85, t: 0, max: 2.6, kieu: "xe" }); } }
+  if (ST.giao > 0) { W.gh = (W.gh || 0) + dt; if (W.gh >= 8) { W.gh = 0; const t = Math.round(10 * KT * ST.giao * heGia() * (1 + ST.gia)); S.tien += t; W.thu += t; S.tongThu = (S.tongThu || 0) + t; const q = iso(CUA.gx, CUA.gy, 70); chu("🛵 +" + soTien(t), q.x, q.y, "#80deea"); const q2 = iso(CUA.gx, LE()); W.hat.push({ x: q2.x, y: q2.y - 20, vx: -170, vy: 85, t: 0, max: 2.6, kieu: "xe" }); } }
   W.sinh -= dt; let lan = 0;
   while (W.sinh <= 0 && lan < 4) { lan++; const rac = 1 + Math.min(1.2, W.rac.length * 0.15); W.sinh += 10 / (1 + 0.4 * (sao() - 1)) / (1 + ST.khach) / (W.buff.khach > 0 ? 2 : 1) / (W.caoDiem ? 2.5 : 1) / (W.sk && W.sk.loai === "dulich" ? 3 * (1 + ST.bus) : 1) * (W.mua > 0 ? 1.7 / (1 + ST.mua) : 1) * rac * (0.6 + Math.random() * 0.8); if (!sinhKhach()) { W.sinh = Math.max(W.sinh, 0.3); break; } }
   if (W.sinh < -5) W.sinh = 0;
@@ -1699,8 +1712,9 @@ let luuLoi = 0, idb = null, canLuu = false, dangNap = false, lanLuu = 0, soLanGh
 try { const rq = indexedDB.open("nhavv", 1); rq.onupgradeneeded = () => rq.result.createObjectStore("luu"); rq.onsuccess = () => { idb = rq.result; }; } catch (e) {}
 try { navigator.storage && navigator.storage.persist && navigator.storage.persist(); } catch (e) {}
 function luu() { canLuu = true; } // chi danh dau; ghi that 5 phut mot lan va khi roi trang
+let xoaHet = false;
 function luuNgay() {
-  if (dangNap) return; canLuu = false; lanLuu = Date.now(); soLanGhi++;
+  if (dangNap || xoaHet) return; canLuu = false; lanLuu = Date.now(); soLanGhi++;
   S.luc = Date.now(); let j = "";
   try { j = JSON.stringify(S); } catch (e) { luuLoi++; return; }
   try { localStorage.setItem(KHOA, j); localStorage.setItem(KHOA + "_dp", j); } catch (e) { luuLoi++; }
@@ -1805,7 +1819,7 @@ const NVU = [
   ["xeday", "🍦", "Tiền bán ở xe đẩy vỉa hè", () => S.xeThu || 0, (k) => Math.round(500 * Math.pow(3, k))],
   ["dangnhap", "📅", "Chuỗi ngày đăng nhập", () => S.dnChuoi || 0, (k) => 2 + k * 2],
 ];
-const thuongNV = (k) => Math.round((150 + (S.thuPhut || 0) * 2) * (1 + k * 0.4) * (1 + ST.nv));
+const thuongNV = (k) => Math.round((80 + (S.thuPhut || 0) * 1) * (1 + k * 0.3) * (1 + ST.nv));
 const soNVXong = () => NVU.filter(([id, , , lay, moc]) => lay() >= moc(S.nv[id] || 0)).length;
 function veNhiemVu() {
   const tk = document.createElement("div"); tk.className = "o"; tk.style.gridColumn = "1 / -1";
@@ -1898,10 +1912,10 @@ $("#vqNut").onclick = () => {
   const n = $("#vqNut"); n.dataset.quay = 1; n.disabled = true; n.textContent = "Đang quay..."; keu(660, .1);
   setTimeout(() => {
     const m = 1 + ST.mm, tp = Math.max(300, S.thuPhut || 0); let t = 0, msg = "";
-    if (i === 0) t = tp * 10 * m; if (i === 5) t = tp * 30 * m; if (i === 6) t = 100 * m;
-    if (i === 4) { t = Math.round((100 + (S.thuPhut || 0) * 0.6) * (1 + ST.qua)) * 3; S.soQua = (S.soQua || 0) + 3; }
+    if (i === 0) t = tp * 5 * m; if (i === 5) t = tp * 15 * m; if (i === 6) t = 50 * m;
+    if (i === 4) { t = Math.round((50 + (S.thuPhut || 0) * 0.3) * (1 + ST.qua)) * 3; S.soQua = (S.soQua || 0) + 3; }
     if (i === 1) W.buff.nhanh = 60; if (i === 2) W.buff.khach = 60; if (i === 3) W.buff.tien = 60;
-    if (i === 7) { const j = S.mon.findIndex((x) => x === 0); if (j >= 0) { S.mon[j] = 1; msg = "🍜 Mở miễn phí món " + MON[j].ten + "!"; } else t = tp * 10 * m; }
+    if (i === 7) { const j = S.mon.findIndex((x) => x === 0); if (j >= 0) { S.mon[j] = 1; msg = "🍜 Mở miễn phí món " + MON[j].ten + "!"; } else t = tp * 5 * m; }
     t = Math.round(t); if (t) { S.tien += t; S.tongThu = (S.tongThu || 0) + t; }
     msg = msg || (t ? VQ[i][0] + " " + VQ[i][1] + ": +" + soTien(t) : VQ[i][0] + " " + VQ[i][1] + " trong 60 giây!");
     $("#vqKQ").textContent = msg; thongBao(msg); phaoGiay(0); tingTien(); delete n.dataset.quay; luu(); capNhatVQ();
@@ -1937,13 +1951,13 @@ function moDo() {
   document.querySelectorAll("#dvChon button").forEach((b) => (b.onclick = () => {
     if ((S.doLuc || 0) > Date.now()) return; S.doLuc = Date.now() + 180000;
     document.querySelectorAll("#dvChon button").forEach((x) => { x.disabled = true; x.style.background = x.dataset.d === "1" ? "linear-gradient(#81c784,#2e7d32)" : "#bdbdbd"; });
-    if (b.dataset.d === "1") { const th = Math.round(Math.max(200, (S.thuPhut || 0) * 4)); S.tien += th; S.tongThu = (S.tongThu || 0) + th; themXP(10); $("#dvKQ").style.color = "#2e7d32"; $("#dvKQ").textContent = "Đúng rồi! Thưởng " + soTien(th); tingTien(); phaoGiay(0); }
+    if (b.dataset.d === "1") { const th = Math.round(Math.max(100, (S.thuPhut || 0) * 2)); S.tien += th; S.tongThu = (S.tongThu || 0) + th; themXP(10); $("#dvKQ").style.color = "#2e7d32"; $("#dvKQ").textContent = "Đúng rồi! Thưởng " + soTien(th); tingTien(); phaoGiay(0); }
     else { $("#dvKQ").style.color = "#c62828"; $("#dvKQ").textContent = "Chưa đúng. Đáp án là: " + doCau[1]; keu(220, .2, "sawtooth", .04); }
     luu(); }));
 }
 const ngayNay = (d = new Date()) => d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
 const chuoiMoi = () => (S.dnNgay === ngayNay(new Date(Date.now() - 864e5)) ? (S.dnChuoi || 0) + 1 : 1);
-const quaNgay = (c) => Math.round((300 + (S.thuPhut || 0) * 5) * (1 + 0.5 * ((c - 1) % 7)) * (1 + ST.dn));
+const quaNgay = (c) => Math.round((150 + (S.thuPhut || 0) * 2.5) * (1 + 0.5 * ((c - 1) % 7)) * (1 + ST.dn));
 function moQN() {
   $("#qn").classList.remove("an"); const roi = S.dnNgay === ngayNay(), c = roi ? S.dnChuoi || 1 : chuoiMoi(), vt = (c - 1) % 7;
   $("#qnChuoi").textContent = roi ? `Hôm nay anh đã nhận quà rồi · chuỗi ${c} ngày liên tiếp` : `Chuỗi đăng nhập: ngày thứ ${c} liên tiếp`;
@@ -1997,6 +2011,16 @@ $("#nXuat").onclick = () => { const m = maLuu(), o = $("#oMa"); o.classList.remo
   $("#tMa").textContent = "Đã chép mã sao lưu. Anh dán mã này vào tin nhắn để giữ; khi cần thì bấm \"Nhập mã sao lưu\" và dán vào."; };
 $("#nNhap").onclick = () => { const o = $("#oMa"); if (o.classList.contains("an") || !o.value.trim()) { o.classList.remove("an"); o.value = ""; o.placeholder = "Dán mã sao lưu vào đây rồi bấm lại nút Nhập"; o.focus(); return; }
   if (!napMa(o.value)) $("#tMa").textContent = "Mã không đúng, anh kiểm tra lại giúp em."; };
+function choiLai() {
+  xoaHet = true; chay = false;
+  try { for (const k of [KHOA, KHOA + "_dp", "nhvv3"]) localStorage.removeItem(k); } catch (e) {}
+  const xong = () => { try { localStorage.removeItem(KHOA); localStorage.removeItem(KHOA + "_dp"); } catch (e) {} location.reload(); };
+  try { const rq = indexedDB.open("nhavv", 1); rq.onupgradeneeded = () => rq.result.createObjectStore("luu"); rq.onsuccess = () => { try { const tx = rq.result.transaction("luu", "readwrite"); tx.objectStore("luu").delete(KHOA); tx.oncomplete = xong; tx.onerror = xong; } catch (e) { xong(); } }; rq.onerror = xong; } catch (e) { xong(); }
+  setTimeout(xong, 2500);
+}
+$("#nMoi").onclick = () => $("#hoiMoi").classList.remove("an");
+$("#moiKhong").onclick = () => { $("#hoiMoi").classList.add("an"); $("#nVao").onclick(); };
+$("#moiCo").onclick = choiLai;
 $("#nVao").onclick = () => { const t = $("#oTen").value.trim(); if (t) S.ten = t; $("#md").classList.add("an"); chay = true; if (S.dnNgay !== ngayNay()) setTimeout(moQN, 600); try { ac = ac || new (window.AudioContext || window.webkitAudioContext)(); ac.resume && ac.resume(); } catch (e) {} keu(660, .1); };
 
 // ======================================================================
@@ -2009,14 +2033,14 @@ batNV(S.moNV === undefined ? BAN === "may-tinh" && LW >= 1000 : !!S.moNV);
 $("#tk").classList.toggle("gon", S.tkGon === undefined ? BAN !== "may-tinh" || LW < 560 : !!S.tkGon);
 if (S.tong > 0) {
   const vang = Math.min(480, (Date.now() - (S.luc || Date.now())) / 60000);
-  const thu = Math.round(vang * (S.thuPhut || 0) * 0.25 * (1 + ST.vang));
+  const thu = Math.round(vang * (S.thuPhut || 0) * 0.15 * (1 + ST.vang));
   let them = ""; if (thu > 0 && vang > 2) { S.tien += thu; them = `<br>Trong ${Math.round(vang)} phút anh vắng, quán thu thêm 💰 ${soTien(thu)}`; }
   $("#dongLuu").innerHTML = `Quán đang có 💰 ${soTien(S.tien)} · ${sao()} sao · đã phục vụ ${soTien(S.tong)} khách` + them;
-  $("#nVao").textContent = "▶ Mở cửa tiếp"; W.tienHien = S.tien;
+  $("#nVao").textContent = "▶ Chơi tiếp tục"; $("#nMoi").classList.remove("an"); W.tienHien = S.tien;
 }
 if (!S.tong && !localStorage.getItem(KHOA)) docIDB((j) => { try { const s = j && JSON.parse(j); if (s && s.cap && s.tong > 0 && !chay) { localStorage.setItem(KHOA, j); dangNap = true; location.reload(); } } catch (e) {} });
 requestAnimationFrame(khung);
-window.__luuNgay = luuNgay; window.__soLanGhi = () => soLanGhi; window.__soTK = soTK; window.__nangTatCa = nangTatCa; window.__anhSan = () => anhSan; window.__tab = (t) => (tab = t);
+window.__luuNgay = luuNgay; window.__choiLai = choiLai; window.__soLanGhi = () => soLanGhi; window.__soTK = soTK; window.__nangTatCa = nangTatCa; window.__anhSan = () => anhSan; window.__tab = (t) => (tab = t);
 window.__W = () => W; window.__S = () => S; window.__ve = () => ve(); window.__dongBo = dongBo; window.__CAM = CAM; window.__muaHet = (n) => { UP.forEach((u) => (S.cap[u.id] += n)); MON.forEach((m, i) => (S.mon[i] += n)); TT.forEach((t) => (S.tt[t.id] = (S.tt[t.id] || 0) + n)); dongBo(); };
 </script>
 </body>
