@@ -216,7 +216,7 @@
       <div id="qnChuoi" style="font-weight:900;color:#2e7d32;font-size:17px"></div>
       <div class="ngay" id="qnNgay"></div>
       <div id="qnKQ" style="font-weight:900;color:#5d4037;font-size:17px;min-height:24px"></div>
-      <div><button class="nut" id="qnNhan">🎁 Nhận quà</button></div>
+      <div style="display:flex;gap:10px;justify-content:center"><button class="nut" id="qnNhan">🎁 Nhận quà</button><button class="nut" id="qnDong" style="background:linear-gradient(#ff8a65,#e4572e);box-shadow:0 5px 0 #9b3418">Đóng</button></div>
     </div>
   </div>
 
@@ -1955,9 +1955,9 @@ $("#qnNhan").onclick = () => {
   if (S.dnNgay === ngayNay()) return; const c = chuoiMoi(), th = quaNgay(c); S.dnNgay = ngayNay(); S.dnChuoi = c; S.tien += th; S.tongThu = (S.tongThu || 0) + th; themXP(5 + c);
   let them = ""; if (c % 7 === 0) { const j = S.mon.findIndex((x) => x === 0); if (j >= 0) { S.mon[j] = 1; them = " · mở món " + MON[j].ten; } else { const ds = monMo(), i = ds[Math.floor(Math.random() * ds.length)]; S.mon[i] += 3; them = " · " + MON[i].ten + " lên 3 cấp"; } }
   $("#qnKQ").textContent = "Đã nhận " + soTien(th) + them + "!"; thongBao("📅 Quà ngày thứ " + c + ": +" + soTien(th) + them); tingTien(); phaoGiay(0); luu();
-  $("#qnNhan").disabled = true; $("#qnNhan").textContent = "✔ Đã nhận"; $("#soQN").classList.add("an");
+  $("#qnNhan").disabled = true; $("#qnNhan").textContent = "✔ Đã nhận"; $("#soQN").classList.add("an"); setTimeout(() => $("#qn").classList.add("an"), 1800);
 };
-$("#nQN").onclick = moQN; $("#qn").addEventListener("click", (e) => { if (e.target.id === "qn") $("#qn").classList.add("an"); });
+$("#nQN").onclick = moQN; $("#qnDong").onclick = () => $("#qn").classList.add("an"); $("#qn").addEventListener("click", (e) => { if (e.target.id === "qn") $("#qn").classList.add("an"); });
 setInterval(() => { $("#soQN").classList.toggle("an", S.dnNgay === ngayNay()); }, 2000);
 $("#nDo").onclick = moDo; $("#dvDong").onclick = () => $("#dv").classList.add("an");
 setInterval(() => { $("#soDo").classList.toggle("an", (S.doLuc || 0) > Date.now()); }, 1000);
