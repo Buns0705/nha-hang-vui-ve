@@ -7906,12 +7906,16 @@ const soNVXong = () => NVU.filter(([id, , , lay, moc]) => lay() >= moc(S.nv[id] 
 function moThanhTich(ngan) {
   PN_TEN = "tt"; ngan = ngan || "nv";
   let h = `<h2>🏆 Thành tích</h2><div class="dong2" style="justify-content:flex-start;margin:0 0 8px"><button class="nut ${ngan === "nv" ? "" : "trang"}" data-n="nv">Nhiệm vụ</button><button class="nut ${ngan === "hh" ? "" : "trang"}" data-n="hh">Huy hiệu ${Object.keys(S.hh).length}/${HH.length}</button><button class="nut ${ngan === "tk" ? "" : "trang"}" data-n="tk">Thống kê</button></div>`;
+  if (ngan === "nv") { const sx = soNVXong(); h += `<div class="dong2" style="justify-content:flex-start;margin:0 0 8px"><button class="nut xanhla" id="nvTatCa" ${sx ? "" : "disabled"}>🎁 Nhận tất cả${sx ? " (" + sx + ")" : ""}</button></div>`; }
   if (ngan === "nv") h += NVU.map(([id, b, ten, lay, moc]) => { const k = S.nv[id] || 0, m = moc(k), x = lay(), xong = x >= m, het = !isFinite(m);
     return `<div class="dongNV"><div style="display:flex;gap:8px;align-items:center"><span style="font-size:24px">${b}</span><div style="flex:1"><b>${ten}</b> <small>· mốc ${k + 1}</small><div style="font-size:12px">${het ? "Đã hoàn thành tất cả" : soTien(Math.min(x, m)) + " / " + soTien(m) + " · thưởng " + soTien(thuongNV(k))}</div><div class="thanh"><b style="width:${het ? 100 : Math.min(100, 100 * x / m)}%"></b></div></div><button class="nut xanhla" data-nv="${id}" ${xong && !het ? "" : "disabled"}>${het ? "✔" : xong ? "🎁 Nhận" : "Chưa đạt"}</button></div></div>`; }).join("");
   if (ngan === "hh") h += `<div style="font-size:12.5px;margin-bottom:6px">Mỗi huy hiệu mới thưởng ${soTien(thuongHH())}</div><div class="hh">${HH.map(([id, b, ten]) => `<div class="${S.hh[id] ? "" : "chua"}"><b>${b}</b>${ten}${S.hh[id] ? `<br><small style="color:#2fae4b">${new Date(S.hh[id]).toLocaleDateString("vi-VN")}</small>` : ""}</div>`).join("")}</div>`;
   if (ngan === "tk") h += `<div class="dongNV" style="line-height:1.7;font-size:14px">Đã phục vụ <b>${soTien(S.tong)}</b> khách · bỏ về <b>${soTien(S.mat)}</b><br>Tổng thu <b>${soTien(S.tongThu || 0)}</b> · gần đây <b>${soTien(S.thuPhut || 0)}/phút</b><br>${N.ban} bàn tầng 1${N.ban2 ? ", " + N.ban2 + " bàn sân thượng" : ""}, ${W.cho.length} chỗ ngồi<br>${N.bep} đầu bếp, ${N.pv} phục vụ, ${N.lc} lao công<br>Tiệc đã giao <b>${S.tiecXong || 0}</b>, lỡ <b>${S.tiecHong || 0}</b> · rau đã thu <b>${S.soRau || 0}</b><br>Xe đẩy bán được ${soTien(S.xeThu || 0)} · chuỗi đăng nhập ${S.dnChuoi || 0} ngày<br>💝 Khách quen: ${Object.entries(S.kq || {}).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([t, n]) => esc(t) + " " + n + " lần").join(" · ") || "chưa có"}</div>`;
   moPN(h, 720);
   $("#pnNd").querySelectorAll("[data-n]").forEach((b) => (b.onclick = () => moThanhTich(b.dataset.n)));
+  const nTC = $("#nvTatCa"); if (nTC) nTC.onclick = () => { let tong = 0, so = 0;
+    for (const it of NVU) { let lan = 0; while (lan++ < 500) { const k = S.nv[it[0]] || 0, m = it[4](k); if (!isFinite(m) || !(it[3]() >= m)) break; const th = thuongNV(k); S.tien += th; tong += th; so++; S.nv[it[0]] = k + 1; } }
+    if (so) { thongBao(`🏆 Đã nhận ${so} phần thưởng thành tích! Tổng ${soTien(tong)}`); tingTien(); luu(); } moThanhTich("nv"); };
   $("#pnNd").querySelectorAll("[data-nv]").forEach((b) => (b.onclick = () => { const it = NVU.find((x) => x[0] === b.dataset.nv); if (!it || !(it[3]() >= it[4](S.nv[it[0]] || 0))) return; const th = thuongNV(S.nv[it[0]] || 0); S.tien += th; S.nv[it[0]] = (S.nv[it[0]] || 0) + 1; thongBao(`🏆 Hoàn thành "${it[2]}"! Thưởng ${soTien(th)}`); tingTien(); luu(); moThanhTich("nv"); }));
 }
 $("#nNVu").onclick = () => moThanhTich();
@@ -8262,17 +8266,19 @@ function capKhungPC() {
   const key = nc + hd + (HD ? Math.floor(HD.t / HD.dai * 20) : "") + p.ten + mau;
   if (key === pcKhoa) return; pcKhoa = key;
   k.innerHTML = `<div class="anh" style="background-image:url(${anhPC()});border-color:${mau}"><i>${tt === "Rất vui" ? "😄" : tt === "Vui vẻ" ? "🙂" : tt === "Bình thường" ? "😐" : tt === "Không vui" ? "🙁" : "😫"}</i></div>
-   <div class="ct"><div class="tn">${esc(p.ten)} · <span style="color:${mau}">${tt}</span></div><div class="nc">${nc}</div><div class="hd">${hd}</div>${HD ? `<div class="tienDo"><u style="width:${Math.min(100, HD.t / HD.dai * 100)}%"></u></div>` : ""}</div>${HD ? `<button id="pcHuy" title="Huỷ việc đang làm">✕</button>` : ""}`;
+   <div class="ct"><div class="tn">${esc(p.ten)} · <span style="color:${mau}">${tt}</span></div><div class="nc">${nc}</div><div class="hd">${hd}</div>${HD ? `<div class="tienDo"><u style="width:${Math.min(100, HD.t / HD.dai * 100)}%"></u></div>` : ""}</div>${HD ? `<button id="pcHuy" title="Huỷ việc đang làm">✕</button>` : ""}<button id="pcDay" title="Hồi đầy tất cả chỉ số" style="flex:none;border:0;border-radius:50%;width:30px;height:30px;padding:0;font-size:13px;font-weight:900;color:#fff;background:linear-gradient(#66bb6a,#2e9e6b);box-shadow:0 3px 0 #1b6e48;cursor:pointer">💯</button>`;
+  const dy = $("#pcDay"); if (dy) dy.onclick = (e) => { e.stopPropagation(); hoiDayPC(); };
   const h = $("#pcHuy"); if (h) h.onclick = (e) => { e.stopPropagation(); huyHanhDong(); };
 }
 setInterval(() => { try { if (chay) capKhungPC(); } catch (e) {} }, 400);
+function hoiDayPC() { if (!S.pc) return; for (const k in S.pc.nc) S.pc.nc[k] = 100; pcKhoa = ""; thongBao("💯 " + S.pc.ten + " đã hồi đầy tất cả chỉ số!"); try { keu(880, .15, "sine"); } catch (e) {} luu(); capKhungPC(); if (PN_TEN === "pc") moPC("nc"); }
 function thanh(v, mau) { return `<div class="thanh"><u style="width:${Math.max(2, Math.min(100, v))}%;background:${mau}"></u></div>`; }
 function moPC(tabPC) {
   PN_TEN = "pc"; const p = S.pc, ng = NGHE[p.nghe.nganh], t = tabPC || "nc";
   const tabs = [["nc", "😊 Nhu cầu"], ["kn", "📘 Kỹ năng"], ["nghe", "💼 Nghề nghiệp"], ["nha", "🏠 Nhà riêng"], ["do", "👔 Quần áo"]].map(([k, n]) => `<button class="nut ${k === t ? "xanhla" : "trang"}" data-t="${k}">${n}</button>`).join("");
   let nd = "";
   if (t === "nc") { const [tt, m] = chuTamTrang();
-    nd = `<div style="font-weight:900;margin:6px 0">Tâm trạng: <span style="color:${m}">${tt}</span> · nhu cầu đầy thì làm việc, học kỹ năng và đi làm tốt hơn</div><div class="luoiPC">` +
+    nd = `<div class="dong2" style="justify-content:flex-start;margin:4px 0"><button class="nut xanhla" id="pcDay2">💯 Hồi đầy tất cả chỉ số</button></div><div style="font-weight:900;margin:6px 0">Tâm trạng: <span style="color:${m}">${tt}</span> · nhu cầu đầy thì làm việc, học kỹ năng và đi làm tốt hơn</div><div class="luoiPC">` +
       Object.entries(NHU_CAU).map(([k, [b, n, tot]]) => `<div class="oPC"><b>${b} ${n}</b> <small>${Math.round(p.nc[k])}% · ${p.nc[k] > 60 ? "đang " + tot : "cần chăm"}</small>${thanh(p.nc[k], p.nc[k] > 50 ? "#66bb6a" : p.nc[k] > 25 ? "#ffb300" : "#ef5350")}<small>${{ doi: "Bếp, tủ lạnh ở nhà, nếm món ở quán", nl: "Ngủ giường, ngồi ghế đá, sofa", vui: "Xem ti vi, xem biểu diễn Nhà hát lớn", gt: "Trò chuyện với khách, nhân viên, gọi điện", vs: "Tắm, đi vệ sinh (nhà riêng hoặc quán)" }[k]}</small></div>`).join("") + `</div>`; }
   if (t === "kn") nd = `<div style="margin:6px 0;font-size:13.5px">Kỹ năng không giới hạn cấp. Mỗi cấp tăng thêm hiệu quả cho quán.</div><div class="luoiPC">` + Object.entries(KY_NANG).map(([k, [b, n]]) => { const x = p.kn[k], l = capKN(x), lo = 12 * (l - 1) ** 2, hi = 12 * l ** 2;
     return `<div class="oPC"><b>${b} ${n}</b> <small>${tenCapKN(x)}</small>${thanh((x - lo) / (hi - lo) * 100, "#42a5f5")}<small>${{ nau: "+1% giá món/cấp; nấu món đặc biệt", gt: "+1% tiền boa/cấp; kể chuyện vui cho khách", kd: "+1% thu khi vắng/cấp; tăng lương", vuon: "+3% rau vườn/cấp", tl: "đi nhanh hơn, đỡ mệt" }[k]}</small></div>`; }).join("") + `</div>`;
@@ -8294,7 +8300,7 @@ function moPC(tabPC) {
   q("[data-do]").forEach((b) => (b.onclick = () => { nangDoNha(b.dataset.do); moPC("nha"); }));
   const on = (s, f) => { const e = $(s); if (e) e.onclick = f; };
   on("#ngTu", () => { p.nghe.tuDi = !p.nghe.tuDi; luu(); moPC("nghe"); }); on("#ngDi", () => { dongPN(); const g = gioGame(); if (g >= ng.gio[0] && g < ng.gio[1]) diLam(); else thongBao(`⏰ Giờ làm ${ng.gio[0]}h–${ng.gio[1]}h, bây giờ là ${Math.floor(g)}h`); });
-  on("#ngNghi", () => { p.nghe.nganh = ""; luu(); moPC("nghe"); }); on("#nhVe", () => { dongPN(); pcVeNha(); }); on("#nhXem", () => { dongPN(); const c = nhaLocal(8, 10); bayToi(c.gx, c.gy, 24, 0.85); }); on("#nhMo", () => { moRongNha(); moPC("nha"); });
+  on("#ngNghi", () => { p.nghe.nganh = ""; luu(); moPC("nghe"); }); on("#nhVe", () => { dongPN(); pcVeNha(); }); on("#nhXem", () => { dongPN(); const c = nhaLocal(8, 10); bayToi(c.gx, c.gy, 24, 0.85); }); on("#nhMo", () => { moRongNha(); moPC("nha"); }); on("#pcDay2", hoiDayPC);
   ganTuDo();
 }
 function moNghe() { moPC("nghe"); }
