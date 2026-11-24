@@ -1069,6 +1069,7 @@ function renDo(d, im) {
 }
 
 /* ---------- nhiệm vụ ---------- */
+function nvN0() { return nvHienTai(); }
 function nvHienTai() { return NV_CHINH[S.nv.i] || null; }
 function suKienNV(loai, v) {
   const nv = nvHienTai();
@@ -1101,7 +1102,9 @@ function nhanThuongNV(im) {
 function baiCuaQuai(hinh) { return BAI.find(b => b.boss[0] === hinh || b.quai.some(q => q[0] === hinh)); }
 function baiHopCap() { let b = BAI[0]; BAI.forEach(x => { if (S.cap >= x.min) b = x; }); return b; }
 function giaoSuMon() {
-  const b = baiHopCap(); const q = b.quai[Math.floor(Math.random() * b.quai.length)];
+  const b = baiHopCap(); const n = b.quai.length, hi = b.voTan ? 9999 : b.max;
+  const hop = b.quai.map((q, k) => k).filter(k => b.voTan || b.min + (hi - b.min) * k / n <= S.cap + 1);
+  const q = b.quai[hop.length ? hop[Math.floor(Math.random() * hop.length)] : 0];
   const chuoi = (S.sm && S.sm.chuoi) || 0;
   S.sm = { bai: b.id, quai: q[0], ten: q[1], so: 15 + Math.floor(Math.random() * 10), dem: 0, xong: false, chuoi, kn: Math.round(quaiSo(Math.max(S.cap, b.min)).kn * 12 * (1 + Math.min(chuoi, 50) * 0.04)), luong: Math.round((S.cap * 8 + 30) * (1 + Math.min(chuoi, 50) * 0.03)) };
   bao('Nhiệm vụ Sư Môn: hạ ' + S.sm.so + ' ' + q[1] + ' ở ' + b.ten);
@@ -1158,6 +1161,8 @@ function autoBuoc(dt) {
   if (A.tuNhan && (G.t - (G.nhanLuc || -99) > 5)) { G.nhanLuc = G.t; if (S.nv.xong || (S.sm && S.sm.xong) || mocCanNhan().length) nhanTatCa(); }
   // tự cường hóa trang bị (giữ lại đủ tiền mua 120 bình thuốc)
   if (A.tuRen && G.t - (G.renLuc || -99) > 8) { G.renLuc = G.t; const ds = O_TB.map(o => S.mac[o[0]]).filter(Boolean).sort((a, b) => giaRen(a) - giaRen(b)); if (ds.length && S.luong - giaRen(ds[0]) > giaThuoc(S.cap) * 120) { renDo(ds[0], true); chuBay(P.x, P.y - 40, 'Tự cường hóa ' + ds[0].ten + ' +' + ds[0].plus, '#ffd04a', 0.8); } }
+  // nhiệm vụ mua thuốc: tự mua cho xong
+  if (nvN0() && nvN0().loai === 'mua' && !S.nv.xong) muaThuoc('mau', Math.max(1, nvN0().so - S.nv.dem), true);
   // Sư Môn ở bãi cũ (đã vượt cấp) thì tự đổi sang bãi hợp cấp, giữ chuỗi
   if (S.sm && S.sm.quai && !S.sm.xong && S.sm.bai !== baiHopCap().id) giaoSuMon();
   // nhiệm vụ nói chuyện: tự tới gặp NPC trong thành
