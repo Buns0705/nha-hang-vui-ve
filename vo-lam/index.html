@@ -149,6 +149,7 @@ label{display:flex;align-items:center;gap:6px}
   #thuoc{bottom:calc(max(10px,env(safe-area-inset-bottom)) + 104px);left:8px;transform:none;flex-direction:column}
   .thanh{width:112px}
   #bdn canvas{width:92px;height:70px}
+  #tt{max-width:calc(100vw - 142px)}#tt>div{min-width:0}#tt .ten{white-space:normal;font-size:12px;line-height:1.15}
   #mucTieu{top:106px;left:auto;right:6px;transform:none;min-width:0;max-width:185px;font-size:11px}
   #nvNho{top:106px;max-width:185px;font-size:10.5px}
   #tb{top:150px}#tb div{font-size:11.5px}
@@ -523,6 +524,12 @@ function taoMap(id) {
     // cờ + sạp
     [[cx - 11, cy - 4, 'co0'], [cx + 11, cy - 4, 'coC'], [cx - 11, cy + 4, 'coD'], [cx + 11, cy + 4, 'coE']].forEach(p => datVat(p[2], Math.round(p[0]), Math.round(p[1])));
     datVat('sap', Math.round(cx - 9), Math.round(cy + 2)); datVat('sap', Math.round(cx + 6), Math.round(cy + 2));
+    // khu nhà phía nam + tượng đá hai bên cổng + cờ dọc đường
+    const nhaDuoi = cfg.theme === 'kinh' ? ['nhaPhai', 'nhaDo', 'tiemDa', 'nhaDo'] : cfg.theme === 'thu' ? ['nhaCam', 'leuRom', 'nhaGo', 'tiemDa'] : cfg.theme === 'xanh' ? ['nhaGo', 'nhaDo', 'tiemLuc', 'nhaBe'] : ['nhaBe', 'nhaDo', 'tiemLuc', 'nhaCam'];
+    [[cx - 19, cy + 9], [cx - 13, cy + 10], [cx + 6, cy + 10], [cx + 12, cy + 9]].forEach((p, i) => datVat(nhaDuoi[i], Math.round(p[0]), Math.round(p[1])));
+    datVat('tuong', Math.round(cx - 5), cy + 7); datVat('tuong', Math.round(cx + 3), cy + 7);
+    [[cx - 3.5, cy + 12, 'coB'], [cx + 2.5, cy + 12, 'coC'], [cx - 3.5, cy + 16, 'co0'], [cx + 2.5, cy + 16, 'coE'], [cx - 3, cy - 11, 'coD'], [cx + 2, cy - 11, 'coB']].forEach(p => datVat(p[2], Math.round(p[0]), Math.round(p[1])));
+    datVat('sap', Math.round(cx - 16), Math.round(cy - 3)); datVat('sap', Math.round(cx + 13), Math.round(cy - 3));
     // NPC
     const thuTu = ['thoren', 'duoc', 'thukho', 'lequan'];
     thuTu.forEach((id2, i) => M.npc.push({ loai: id2, x: npcViTri[i][0] * TILE, y: npcViTri[i][1] * TILE }));
@@ -682,7 +689,7 @@ function trangThaiMoi(ten, ltId) {
     nv: { i: 0, dem: 0, xong: false }, sm: null, moc: { cap: 0, giet: 0 },
     tk: { giet: 0, boss: 0, chet: 0, ren: 0, mua: 0, nhat: 0, giay: 0 },
     auto: { bat: false, danh: true, timQuai: true, timBai: true, nhat: true, chiDungHe: false, boTrang: false, uongMau: 55, uongMana: 35,
-      muaThuoc: true, minMau: 10, denMau: 60, minMana: 10, denMana: 60, banTrang: false, tuMac: true, tuCong: true, dungChieu: true },
+      muaThuoc: true, minMau: 10, denMau: 60, minMana: 10, denMana: 60, banTrang: true, tuMac: true, tuCong: true, dungChieu: true, tuNhan: true, tuRen: true },
     cai: { dohoa: (Math.min(screen.width, screen.height) < 600 ? 'can' : 'dep'), nhac: true, am: true, huongDan: true },
     taoLuc: Date.now(), luuLuc: 0, demId: 1,
   };
@@ -1027,6 +1034,7 @@ function nhatDo(r) {
 }
 function muonNhat(r) {
   if (r.k !== 'do') return true;
+  if (S.tui.length >= TUI_MAX && !(S.auto.banTrang && S.tui.some(d => d.q === 0 && !d.khoa))) { if (S.auto.bat && (!G.baoDay || G.t - G.baoDay > 20)) { bao('Túi đầy – auto bỏ qua đồ. Vào 🎒 Túi đồ để bán bớt.'); G.baoDay = G.t; } return false; }
   if (S.auto.boTrang && r.d.q === 0) return false;
   if (S.auto.chiDungHe && r.d.he !== lt().loai) return false;
   return true;
@@ -1090,6 +1098,7 @@ function nhanThuongNV(im) {
   if (!im) bao('Nhận thưởng: ' + fmt(nv.kn) + ' kinh nghiệm, ' + fmt(nv.luong) + ' lượng' + them2);
   return { kn: nv.kn, luong: nv.luong };
 }
+function baiCuaQuai(hinh) { return BAI.find(b => b.boss[0] === hinh || b.quai.some(q => q[0] === hinh)); }
 function baiHopCap() { let b = BAI[0]; BAI.forEach(x => { if (S.cap >= x.min) b = x; }); return b; }
 function giaoSuMon() {
   const b = baiHopCap(); const q = b.quai[Math.floor(Math.random() * b.quai.length)];
@@ -1145,11 +1154,22 @@ function autoBuoc(dt) {
   if (S.mp / CT.mpMax * 100 < A.uongMana) uongThuoc('mana');
   // mua thuốc từ xa
   if (A.muaThuoc) { if (S.thuoc.mau < A.minMau) muaThuoc('mau', A.denMau - S.thuoc.mau, true); if (S.thuoc.mana < A.minMana) muaThuoc('mana', A.denMana - S.thuoc.mana, true); }
+  // tự nhận thưởng nhiệm vụ / mốc
+  if (A.tuNhan && (G.t - (G.nhanLuc || -99) > 5)) { G.nhanLuc = G.t; if (S.nv.xong || (S.sm && S.sm.xong) || mocCanNhan().length) nhanTatCa(); }
+  // tự cường hóa trang bị (giữ lại đủ tiền mua 120 bình thuốc)
+  if (A.tuRen && G.t - (G.renLuc || -99) > 8) { G.renLuc = G.t; const ds = O_TB.map(o => S.mac[o[0]]).filter(Boolean).sort((a, b) => giaRen(a) - giaRen(b)); if (ds.length && S.luong - giaRen(ds[0]) > giaThuoc(S.cap) * 120) { renDo(ds[0], true); chuBay(P.x, P.y - 40, 'Tự cường hóa ' + ds[0].ten + ' +' + ds[0].plus, '#ffd04a', 0.8); } }
+  // Sư Môn ở bãi cũ (đã vượt cấp) thì tự đổi sang bãi hợp cấp, giữ chuỗi
+  if (S.sm && S.sm.quai && !S.sm.xong && S.sm.bai !== baiHopCap().id) giaoSuMon();
+  // nhiệm vụ nói chuyện: tự tới gặp NPC trong thành
+  const nvN = nvHienTai();
+  if (G.M.laThanh && nvN && nvN.loai === 'noi' && !S.nv.xong) { const n = G.npc.find(z => z.id === nvN.npc); if (n) { if (Math.hypot(n.x - P.x, n.y - P.y) < 30) suKienNV('noi', n.id); else if (!P.duong) diToi(P, n.x, n.y + 10); return; } }
   // tìm bãi
   if (A.timBai) {
-    const tot = baiHopCap();
+    let tot = baiHopCap(); let viNV = false;
+    const nvG = nvHienTai();
+    if (nvG && !S.nv.xong && nvG.loai === 'giet') { const b = baiCuaQuai(nvG.quai); if (b && S.cap >= b.min - 2 && (nvG.quai !== b.boss[0] || S.cap >= b.max - 3)) { viNV = b.id !== tot.id; tot = b; } }
     if (G.M.laThanh) { if (!G.choBai || G.t - G.choBai > 2) { G.choBai = G.t; if (S.luong >= giaXaPhu(tot.id)) { bao('Auto: tự tìm bãi – Xa Phu đưa tới ' + tot.ten + ' (cấp ' + tot.min + '–' + (tot.voTan ? '∞' : tot.max) + ')'); diXaPhu(tot.id, true); } } return; }
-    const cur = G.M.cfg; if (tot.id !== cur.id && !cur.voTan && S.cap >= cur.max + 1 && S.luong >= giaXaPhu(tot.id)) { bao('Auto: quái ở ' + cur.ten + ' đã yếu, tự chuyển sang ' + tot.ten + ' (cấp ' + tot.min + '–' + (tot.voTan ? '∞' : tot.max) + ')'); diXaPhu(tot.id, true); return; }
+    const cur = G.M.cfg; if (tot.id !== cur.id && (viNV || (!cur.voTan && S.cap >= cur.max + 1)) && S.luong >= giaXaPhu(tot.id)) { bao(viNV ? 'Auto: đi ' + tot.ten + ' làm nhiệm vụ "' + nvG.ten + '"' : 'Auto: quái ở ' + cur.ten + ' đã yếu, tự chuyển sang ' + tot.ten + ' (cấp ' + tot.min + '–' + (tot.voTan ? '∞' : tot.max) + ')'); diXaPhu(tot.id, true); return; }
   }
   if (G.M.laThanh) return;
   // nhặt đồ
@@ -1162,8 +1182,13 @@ function autoBuoc(dt) {
   if (A.danh) {
     if (P.muc && P.muc.chet) P.muc = null;
     if (!P.muc) {
+      const quaiNV = {}; const nq = nvHienTai(); if (nq && !S.nv.xong && nq.loai === 'giet') quaiNV[nq.quai] = 1; if (S.sm && !S.sm.xong && S.sm.quai) quaiNV[S.sm.quai] = 1;
       let best = null, bd = A.timQuai ? 1e9 : 8 * TILE;
-      G.quai.forEach(m => { if (m.chet) return; if (m.boss && m.lv > S.cap + 6) return; let d = Math.hypot(m.x - P.x, m.y - P.y); if (m.muc === P) d *= 0.5; if (d < bd) { bd = d; best = m; } });
+      const coNV = G.quai.some(m => !m.chet && quaiNV[m.hinh] && !(m.boss && m.lv > S.cap + 6));
+      G.quai.forEach(m => { if (m.chet) return; if (m.boss && m.lv > S.cap + 6) return; let d = Math.hypot(m.x - P.x, m.y - P.y);
+        const danhTa = m.muc === P && d < 2.5 * TILE;
+        if (coNV && !quaiNV[m.hinh] && !danhTa) return; // có quái nhiệm vụ thì ưu tiên đi tìm chúng
+        if (danhTa) d *= 0.3; if (d < bd) { bd = d; best = m; } });
       if (best) { P.muc = best; P.nhatMuc = null; }
     }
   }
@@ -1616,7 +1641,7 @@ function veAuto(nd) {
   nd.append(h('h3', null, 'Thuốc'), so('uongMau', 'Uống thuốc máu khi máu dưới (%)', 1, 99), so('uongMana', 'Uống thuốc nội lực khi nội lực dưới (%)', 1, 99),
     o('muaThuoc', 'Tự mua thuốc từ xa', 'Cách làm: khi số bình còn ít hơn mức tối thiểu, game tự mua cho đủ số bình mong muốn, trừ lượng đúng giá Dược Điếm (không phải chạy về thành). Hết lượng thì báo.'),
     so('minMau', 'Thuốc máu tối thiểu (bình)', 0, 999), so('denMau', 'Mua cho đủ (bình)', 1, 999), so('minMana', 'Thuốc nội lực tối thiểu (bình)', 0, 999), so('denMana', 'Mua cho đủ (bình)', 1, 999));
-  nd.append(h('h3', null, 'Khác'), o('tuCong', 'Lên cấp tự cộng điểm tiềm năng + kỹ năng'));
+  nd.append(h('h3', null, 'Khác'), o('tuCong', 'Lên cấp tự cộng điểm tiềm năng + kỹ năng'), o('tuNhan', 'Tự nhận thưởng nhiệm vụ và mốc thưởng', 'Như bấm 🎁 Nhận hết mỗi khi có phần thưởng.'), o('tuRen', 'Tự cường hóa trang bị', 'Mỗi 8 giây nâng món rẻ nhất +1, luôn giữ lại đủ lượng mua 120 bình thuốc.'));
 }
 /* ---- Bản đồ ---- */
 function veBanDo(nd) {
